@@ -41,9 +41,3 @@ class Req_GetFileStatus(object):
         self.UserId = UserId
         self.UserSecret = UserSecret
         self.DlTaskID = DlTaskID
-
-class Req_GetServerStatus(object):
-
-    def __init__(self,UserId=u(''), UserSecret=u('')):
-        self.UserId = UserId
-        self.UserSecret = UserSecret

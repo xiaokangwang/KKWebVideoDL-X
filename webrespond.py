@@ -13,6 +13,7 @@ import webReqHander
 
 all_urls = [
     url('ping', webReqHander.PingHandler, name='ping'),
+    url('GetServerStatus', webReqHander.GetServerStatusHandler, name='GetServerStatus'),
     url('webui/{path:any}', file_handler(
             root='gui/',
             age=timedelta(hours=0)), name='default')

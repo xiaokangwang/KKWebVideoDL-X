@@ -16,3 +16,11 @@ class PingHandler(BaseHandler):
         response = HTTPResponse()
         response.write('PING_SUCCESS')
         return response
+
+class GetServerStatusHandler(BaseHandler):
+
+    def post(self):
+        response = HTTPResponse()
+        ServerStatus={}
+        ServerStatus["Version"]="DEVELOP"
+        return self.json_response(ServerStatus)
