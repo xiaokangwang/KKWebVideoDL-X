@@ -61,12 +61,15 @@ def Db_User_Vef(UserId,UserSecret):
 	User=Db_Get_UserCollection().findOne({"UserId":UserId,"UserSecret":UserSecret})
 	if User is not None:
 			if User["Enabled"]==1:
+                Db_LogEvent(eventID.VefUse,{"User":User,"Result":dbResult.VerifyUser_Success})
                 return dbResult.VerifyUser_Success
             else:
+                Db_LogEvent(eventID.VefUse,{"User":User,"Result":dbResult.VerifyUser_Disabled})
                 return dbResult.VerifyUser_Disabled
 	else:
+        Db_LogEvent(eventID.VefUse,{"User":User,"Result":dbResult.VerifyUser_Deny})
 		return dbResult.VerifyUser_Deny
-
+    
 	pass
 
 def Db_User_Disable(UserId,action):
