@@ -4,7 +4,10 @@ from wheezy.routing import url
 from wheezy.web.handlers import BaseHandler
 from wheezy.web.middleware import bootstrap_defaults
 from wheezy.web.middleware import path_routing_middleware_factory
-import .webreq
+from wheezy.web.handlers.file import file_handler
+from wheezy.web.handlers.base import permanent_redirect_handler , redirect_handler
+from datetime import timedelta
+import webreq
 
 
 class PingHandler(BaseHandler):
@@ -17,7 +20,6 @@ class PingHandler(BaseHandler):
 
 all_urls = [
     url('ping', PingHandler, name='ping'),
-    url('', redirect_handler('/webui/index.htm'), name='default'),
     url('webui/{path:any}', file_handler(
             root='gui/',
             age=timedelta(hours=0)), name='default')
