@@ -2,6 +2,8 @@ from pymongo import MongoClient
 import time
 import configure
 import eventID
+import genUserID
+import dbResult
 
 #DataBase Connection Create
 def Db_Get_LogCollection():
@@ -48,12 +50,29 @@ def Db_LogEvent(Event,Details):
 
 #Account management
 def Db_User_Add(UserEmail):
-	pass
+    User=genUserID.genUserID()
+    User["UserEmail"]=UserEmail
+    User["Enabled"]=configure.User_immediate_Enable
+    Db_Get_UserCollection().insert(User)
+    Db_LogEvent(eventID.AddUser,User)
+	return User
 
 def Db_User_Vef(UserId,UserSecret):
+	User=Db_Get_UserCollection().findOne({"UserId":UserId,"UserSecret":UserSecret})
+	if User is not None:
+			if User["Enabled"]==1:
+                return dbResult.VerifyUser_Success
+            else:
+                return dbResult.VerifyUser_Disabled
+	else:
+		return dbResult.VerifyUser_Deny
+
 	pass
 
-def Db_User_Disable(UserId):
+def Db_User_Disable(UserId,action):
+    User=Db_Get_UserCollection().findOne({"UserId":UserId})
+    User["Enabled"]=action
+    Db_Get_UserCollection().update({"UserId":UserId},{ $set: { "Enabled" : action } } )
 	pass
 
 

@@ -7,7 +7,7 @@ AddUser="KKWebVideoDL_EventID_User_Add"
 VefUser="KKWebVideoDL_EventID_User_VefUser"
 
 #Disable User
-VefUser="KKWebVideoDL_EventID_User_Disable"
+DisableUser="KKWebVideoDL_EventID_User_Disable"
 
 
 #Task
