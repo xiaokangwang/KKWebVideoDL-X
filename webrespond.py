@@ -8,18 +8,11 @@ from wheezy.web.handlers.file import file_handler
 from wheezy.web.handlers.base import permanent_redirect_handler , redirect_handler
 from datetime import timedelta
 import webreq
+import webReqHander
  
 
-class PingHandler(BaseHandler):
-
-    def get(self):
-        response = HTTPResponse()
-        response.write('PING_SUCCESS')
-        return response
-
-
 all_urls = [
-    url('ping', PingHandler, name='ping'),
+    url('ping', webReqHander.PingHandler, name='ping'),
     url('webui/{path:any}', file_handler(
             root='gui/',
             age=timedelta(hours=0)), name='default')
