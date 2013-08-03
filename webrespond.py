@@ -17,7 +17,10 @@ class PingHandler(BaseHandler):
 
 all_urls = [
     url('ping', PingHandler, name='ping'),
-    url('', redirect_handler('/gui/index.htm'), name='default'),
+    url('', redirect_handler('/webui/index.htm'), name='default'),
+    url('webui/{path:any}', file_handler(
+            root='gui/',
+            age=timedelta(hours=0)), name='default')
 ]
 
 
