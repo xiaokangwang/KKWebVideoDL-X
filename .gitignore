@@ -38,3 +38,4 @@ nosetests.xml
 
 #Version  File
 version.py
+configure.py
