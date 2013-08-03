@@ -8,7 +8,7 @@ from wheezy.web.handlers.file import file_handler
 from wheezy.web.handlers.base import permanent_redirect_handler , redirect_handler
 from datetime import timedelta
 import webreq
-
+ 
 
 class PingHandler(BaseHandler):
 
