@@ -16,7 +16,8 @@ class PingHandler(BaseHandler):
 
 
 all_urls = [
-    url('ping', PingHandler, name='ping')
+    url('ping', PingHandler, name='ping'),
+    url('', redirect_handler('/gui/index.htm'), name='default'),
 ]
 
 
