@@ -7,8 +7,8 @@ from wheezy.web.middleware import path_routing_middleware_factory
 from wheezy.web.handlers.file import file_handler
 from wheezy.web.handlers.base import permanent_redirect_handler , redirect_handler
 
-
 import webreq
+import version
 
 class PingHandler(BaseHandler):
 
@@ -22,5 +22,5 @@ class GetServerStatusHandler(BaseHandler):
     def post(self):
         response = HTTPResponse()
         ServerStatus={}
-        ServerStatus["Version"]="DEVELOP"
+        ServerStatus["Version"]=version.the_version
         return self.json_response(ServerStatus)
