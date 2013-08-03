@@ -31,3 +31,5 @@ class GetServerStatusHandler(BaseHandler):
         fdhr=(fd.f_bavail * fd.f_frsize) / 1024
         ServerStatus["FreeSpace"]=fdhr
         return self.json_response(ServerStatus)
+        
+

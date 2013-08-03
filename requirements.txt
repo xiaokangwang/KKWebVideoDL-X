@@ -1,1 +1,2 @@
 wheezy.web==0.1.378
+pymongo==2.5.2
