@@ -82,6 +82,11 @@ def Db_User_Disable(UserId,action):
 
 #Download Task management
 def Db_Dl_ListTask(UserId):
+    tasklist=Db_Get_TaskCollection().find({"UserID":UserId})
+    if tasklist is not None:
+        return tasklist
+    else:
+        return None
 	pass
 
 def Db_Dl_AddTask(weburl,UserId):
