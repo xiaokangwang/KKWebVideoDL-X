@@ -95,6 +95,7 @@ def Db_Dl_AddTask(weburl,UserId):
     Task["weburl"]=weburl
     Task["UserId"]=UserId
     Task["TaskId"]=genTaskID.genTaskID()
+    Task["AddTime"]=time.time()
     Db_Get_TaskCollection().insert(Task)
     return Task
 	pass
