@@ -4,6 +4,7 @@ import configure
 import eventID
 import genUserID
 import dbResult
+import genTaskID
 
 #DataBase Connection Create
 def Db_Get_LogCollection():
@@ -82,14 +83,20 @@ def Db_User_Disable(UserId,action):
 
 #Download Task management
 def Db_Dl_ListTask(UserId):
-    tasklist=Db_Get_TaskCollection().find({"UserID":UserId})
-    if tasklist is not None:
-        return tasklist
+    TaskList=Db_Get_TaskCollection().find({"UserID":UserId})
+    if TaskList is not None:
+        return TaskList
     else:
         return None
 	pass
 
 def Db_Dl_AddTask(weburl,UserId):
+    AddingTask={}
+    Task["weburl"]=weburl
+    Task["UserId"]=UserId
+    Task["TaskId"]=genTaskID.genTaskID()
+    Db_Get_TaskCollection().insert(Task)
+    return Task
 	pass
 
 def Db_Dl_GetTaskProgress(DlTaskID):
