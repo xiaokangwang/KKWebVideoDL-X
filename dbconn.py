@@ -107,6 +107,8 @@ def Db_Dl_GetTaskProgress(DlTaskID):
 	pass
 
 def Db_Dl_GetTaskResult(DlTaskID):
+    theTask=Db_Get_TaskCollection().findOne({"DlTaskID":DlTaskID})
+    return theTask["Result"]
 	pass
 
 
