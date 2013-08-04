@@ -111,6 +111,14 @@ def Db_Dl_GetTaskResult(DlTaskID):
     return theTask["Result"]
 	pass
 
+def Db_Dl_SetTaskProgress(DlTaskID,Progress):
+    theTask=Db_Get_TaskCollection().update({"DlTaskID":UserId},{ $set: { "Progress" : Progress } } )
+    pass
+
+def Db_Dl_SetTaskResult(DlTaskID,Result):
+    theTask=Db_Get_TaskCollection().update({"DlTaskID":UserId},{ $set: { "Result" : Result } } )
+    pass
+
 
 
 #Downloaded File Management
