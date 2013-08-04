@@ -102,6 +102,8 @@ def Db_Dl_AddTask(weburl,UserId):
 	pass
 
 def Db_Dl_GetTaskProgress(DlTaskID):
+    theTask=Db_Get_TaskCollection().findOne({"DlTaskID":DlTaskID})
+    return theTask["Progress"]
 	pass
 
 def Db_Dl_GetTaskResult(DlTaskID):
