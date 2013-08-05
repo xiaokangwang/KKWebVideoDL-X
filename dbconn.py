@@ -146,7 +146,9 @@ def Db_File_AchivedTask(DlTaskID):
 #Server Status
 
 def Db_Server_SetStatus(StatusID):
-	pass
+    Db_Get_StatusCollection().update({"Domain":"Current"},{$set: {"Status":StatusID}})
+	
 
 def Db_Server_GetStatus():
-	pass
+    return Db_Get_StatusCollection().findOne({"Domain":"Current"})["Status"]
+	
