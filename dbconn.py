@@ -115,6 +115,9 @@ def Db_Dl_SetTaskResult(DlTaskID,Result):
     theTask=Db_Get_TaskCollection().update({"DlTaskID":UserId},{ $set: { "Result" : Result } } )
     pass
 
+def Db_Dl_EnableTask(DlTaskID,action):
+    theTask=Db_Get_TaskCollection().update({"DlTaskID":UserId},{ $set: { "Enabled" : action } } )
+    pass
 
 
 #Downloaded File Management
