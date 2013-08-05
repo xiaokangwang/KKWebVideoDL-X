@@ -14,6 +14,13 @@ class Req_NewUser(object):
     def __init__(self,UserEmail=u('')):
         self.UserEmail = UserEmail
 
+class Req_DisableUser(object):
+
+    def __init__(self,TargetUserID=u(''),UserId=u(''), UserSecret=u('')):
+        self.UserId = UserId
+        self.TargetUserId = TargetUserId
+        self.UserSecret = UserSecret
+
 class Req_SetPerf(object):
 
     def __init__(self,PreferFreeFormats=0,UserId=u(''), UserSecret=u('')):

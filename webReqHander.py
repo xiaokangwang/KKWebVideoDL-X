@@ -82,3 +82,34 @@ class NewTask(BaseHandler):
 
         return self.json_response(Respond)
 
+class UserDisable(BaseHandler):
+
+    def post(self):
+        response = HTTPResponse()
+        Respond={}
+        DisableUserInfomation=webreq.Req_DisableUser()
+
+        if coreMan.User_Verify(DisableUserInfomation.UserID,DisableUserInfomation.UserSecret) != dbResult.VerifyUser_Success:
+            Error={}
+            Error["Success"]="NO"
+            Error["Reason"]="Authentication_failure"
+            Error["Detail"]= coreMan.User_Verify(DisableUserInfomation.UserID,DisableUserInfomation.UserSecret)
+            return self.json_response(Error)
+        
+        Reason=""
+
+        if DisableUserInfomation.UserID[0] != "#":
+            if DisableUserInfomation.UserID != DisableUserInfomation.TargetUserID:
+                Error={}
+                Error["Success"]="NO"
+                Error["Reason"]="Permission_Denied"
+                return self.json_response(Error)
+            else Reason="Disable_Self"
+        else:
+            Reason="Disable_ADMIN"
+
+
+        coreMan.User_Disable(DisableUserInfomation.TargetUserID,1,Reason)
+
+        Respond["Success"]="YES"
+        return self.json_response(Respond)
