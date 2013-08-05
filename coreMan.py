@@ -12,7 +12,7 @@ def User_Add(UserEmail):
 
 def User_Verify(UserId,UserSecret):
 	Result=dbconn.Db_User_Vef(UserId,UserSecret)
-	dbconn.Db_LogEvent(eventID.VefUse,{"UserID":UserID,"Result":Result})
+	#dbconn.Db_LogEvent(eventID.VefUse,{"UserID":UserID,"Result":Result})
 	return Result
 
 def User_Disable(UserId,action,Operater):

@@ -14,6 +14,7 @@ import sys
 import webreq
 import version
 import coreMan
+import dbResult
 
 class PingHandler(BaseHandler):
 
@@ -53,3 +54,31 @@ class NewUser(BaseHandler):
         Respond["User"]=User
 
         return self.json_response(Respond)
+
+class NewTask(BaseHandler):
+
+    def post(self):
+        response = HTTPResponse()
+        Respond={}
+        DlInfomation=webreq.Req_Dl()
+
+
+        if self.try_update_model(DlInfomation):
+            Error={}
+            Error["Success"]="NO"
+            Error["Reason"]="Unacceptable_Data"
+            return self.json_response(Error)
+
+        if coreMan.User_Verify(DlInfomation.UserID,DlInfomation.UserSecret) != dbResult.VerifyUser_Success:
+            Error={}
+            Error["Success"]="NO"
+            Error["Reason"]="Authentication_failure"
+            Error["Detail"]= coreMan.User_Verify(DlInfomation.UserID,DlInfomation.UserSecret)
+            return self.json_response(Error)
+
+        Task=coreMan.Task_Add(DlInfomation.weburl,DlInfomation.UserID)
+        Respond["Success"]="YES"
+        Respond["Task"]=Task
+
+        return self.json_response(Respond
+
