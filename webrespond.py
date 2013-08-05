@@ -14,6 +14,11 @@ import webReqHander
 all_urls = [
     url('ping', webReqHander.PingHandler, name='ping'),
     url('GetServerStatus', webReqHander.GetServerStatusHandler, name='GetServerStatus'),
+    url('NewUser', webReqHander.NewUser, name='NewUser'),
+    url('NewTask', webReqHander.NewTask, name='NewTask'),
+    url('UserDisable', webReqHander.UserDisable, name='UserDisable'),
+    url('ListTask', webReqHander.ListTask, name='ListTask'),
+    url('AchiveTask', webReqHander.AchiveTask, name='AchiveTask'),
     url('webui/{path:any}', file_handler(
             root='gui/',
             age=timedelta(hours=0)), name='default')
