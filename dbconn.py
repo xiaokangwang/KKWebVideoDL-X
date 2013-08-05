@@ -59,7 +59,7 @@ def Db_User_Add(UserEmail):
     return User
 
 def Db_User_Vef(UserId,UserSecret):
-    User=Db_Get_UserCollection().findOne({"UserId":UserId,"UserSecret":UserSecret})
+    User=Db_Get_UserCollection().find_one({"UserId":UserId,"UserSecret":UserSecret})
     if User is not None:
             if User["Enabled"]==1:
                 return dbResult.VerifyUser_Success
@@ -71,7 +71,7 @@ def Db_User_Vef(UserId,UserSecret):
     
 
 def Db_User_Disable(UserId,action):
-    User=Db_Get_UserCollection().findOne({"UserId":UserId})
+    User=Db_Get_UserCollection().find_one({"UserId":UserId})
     User["Enabled"]=action
     Db_Get_UserCollection().update({"UserId":UserId},{"$set":{ "Enabled" : action } },upsert=False, multi=False )
     
@@ -99,12 +99,12 @@ def Db_Dl_AddTask(weburl,UserId):
     
 
 def Db_Dl_GetTaskProgress(DlTaskID):
-    theTask=Db_Get_TaskCollection().findOne({"DlTaskID":DlTaskID})
+    theTask=Db_Get_TaskCollection().find_one({"DlTaskID":DlTaskID})
     return theTask["Progress"]
     
 
 def Db_Dl_GetTaskResult(DlTaskID):
-    theTask=Db_Get_TaskCollection().findOne({"DlTaskID":DlTaskID})
+    theTask=Db_Get_TaskCollection().find_one({"DlTaskID":DlTaskID})
     return theTask["Result"]
     
 
@@ -120,14 +120,14 @@ def Db_Dl_EnableTask(DlTaskID,action):
     theTask=Db_Get_TaskCollection().update({"DlTaskID":DlTaskID},{ "$set": { "Enabled" : action } } )
 
 def Db_Dl_GetTaskOwner(DlTaskID):
-    theTask=Db_Get_TaskCollection().findOne({"DlTaskID":DlTaskID})
+    theTask=Db_Get_TaskCollection().find_one({"DlTaskID":DlTaskID})
     return theTask["UserId"]
     
 
 
 #Downloaded File Management
 def Db_File_CreateCombination(DlTaskID,File):
-    Filelist=Db_Get_FileCollection().findOne({"DlTaskID":DlTaskID})
+    Filelist=Db_Get_FileCollection().find_one({"DlTaskID":DlTaskID})
     if Filelist is not None:
         Db_Get_FileCollection().update({"DlTaskID":DlTaskID},{ "$push" : { "FileList" : {File} } })
     else:
@@ -136,7 +136,7 @@ def Db_File_CreateCombination(DlTaskID,File):
     
 
 def Db_File_ListCombinated(DlTaskID):
-    Filelist=Db_Get_FileCollection().findOne({"DlTaskID":DlTaskID})
+    Filelist=Db_Get_FileCollection().find_one({"DlTaskID":DlTaskID})
     return Filelist["Filelist"]
 
 def Db_File_ReverseLookupTaskIDByFileName(FileName):
@@ -154,5 +154,5 @@ def Db_Server_SetStatus(StatusID):
     
 
 def Db_Server_GetStatus():
-    return Db_Get_StatusCollection().findOne({"Domain":"Current"})["Status"]
+    return Db_Get_StatusCollection().find_one({"Domain":"Current"})["Status"]
     

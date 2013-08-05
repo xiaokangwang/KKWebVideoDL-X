@@ -171,7 +171,7 @@ $('#Get_a_User_Dig_No_PWUN_reason').on('hidden.bs.popover', function () {
 
 Core_NewUser=function (UserEmail,SuccCallback,FailCallBack) {
     var Core_NewUser_ReqAJAX=$.ajax({
-        url:"NewUser",
+        url:configure_KKWebVideoDL_API_Base_URL+"NewUser",
         async:true,
         cache:false,
         timeout:30000,
@@ -197,7 +197,7 @@ Core_NewUser=function (UserEmail,SuccCallback,FailCallBack) {
 
 Core_GetServerStatus=function (SuccCallback,FailCallBack) {
     var Core_NewUser_ReqAJAX=$.ajax({
-        url:"GetServerStatus",
+        url:configure_KKWebVideoDL_API_Base_URL+"GetServerStatus",
         async:true,
         cache:false,
         timeout:30000,

@@ -38,4 +38,7 @@ nosetests.xml
 
 #Version  File
 version.py
+
+#configure
 configure.py
+gui/js/configure.js

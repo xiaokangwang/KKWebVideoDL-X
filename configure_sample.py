@@ -1,3 +1,12 @@
+#
+# m    m m    mm     m        #      m    m   "        #                mmmm   m             m    m
+# #  m"  #  m" #  #  #  mmm   #mmm   "m  m" mmm     mmm#   mmm    mmm   #   "m #              #  # 
+# #m#    #m#   " #"# # #"  #  #" "#   #  #    #    #" "#  #"  #  #" "#  #    # #               ##  
+# #  #m  #  #m  ## ##" #""""  #   #   "mm"    #    #   #  #""""  #   #  #    # #       """    m""m 
+# #   "m #   "m #   #  "#mm"  ##m#"    ##   mm#mm  "#m##  "#mm"  "#m#"  #mmm"  #mmmmm        m"  "m
+#                                                                                                  
+
+
 ###
 ###Database
 ###
@@ -23,4 +32,4 @@ User_immediate_Enable=1
 Task_immediate_Enable=1
 
 #time to show Task(in second)
-Task_show_time=604800 #5d
+Task_show_time=604800 #7d
