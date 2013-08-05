@@ -13,6 +13,7 @@ import sys
 
 import webreq
 import version
+import coreMan
 
 class PingHandler(BaseHandler):
 
@@ -33,3 +34,22 @@ class GetServerStatusHandler(BaseHandler):
         return self.json_response(ServerStatus)
         
 
+class NewUser(BaseHandler):
+
+    def post(self):
+        response = HTTPResponse()
+        Respond={}
+        UserInfomation=webreq.Req_NewUser()
+
+
+        if self.try_update_model(UserInfomation):
+            Error={}
+            Error["Success"]="NO"
+            Error["Reason"]="Unacceptable_Data"
+            return self.json_response(Error)
+
+        User=coreMan.User_Add(UserInfomation.UserEmail)
+        Respond["Success"]="YES"
+        Respond["User"]=User
+
+        return self.json_response(Respond)
