@@ -221,3 +221,30 @@ Core_GetServerStatus=function (SuccCallback,FailCallBack) {
         FailCallBack("AJAX_FAIL")
     })
 }
+
+Core_UserDisable=function (TargetUserID,UserID,UserSecret,SuccCallback,FailCallBack) {
+    var Core_NewUser_ReqAJAX=$.ajax({
+        url:configure_KKWebVideoDL_API_Base_URL+"UserDisable",
+        async:true,
+        cache:false,
+        timeout:30000,
+        type:"POST",
+        data: "",
+    });
+
+    Core_NewUser_ReqAJAX.done(function(msg) {
+        console.log( "Core_UserDisable_Reqsucc");
+        console.log( msg );
+        ServerRespond=msg
+        if(ServerRespond.Success!="YES"){
+            FailCallBack(ServerRespond.Reason)
+        }else{
+            SuccCallback(msg)
+        }
+    });
+
+    Core_NewUser_ReqAJAX.fail(function(jqXHR, textStatus) {
+        console.log( "Core_UserDisable_Reqfail: " + textStatus );
+        FailCallBack("AJAX_FAIL")
+    })
+}
