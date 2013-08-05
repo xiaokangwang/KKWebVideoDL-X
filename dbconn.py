@@ -109,15 +109,15 @@ def Db_Dl_GetTaskResult(DlTaskID):
 	
 
 def Db_Dl_SetTaskProgress(DlTaskID,Progress):
-    theTask=Db_Get_TaskCollection().update({"DlTaskID":UserId},{ $set: { "Progress" : Progress } } )
+    theTask=Db_Get_TaskCollection().update({"DlTaskID":DlTaskID},{ $set: { "Progress" : Progress } } )
     
 
 def Db_Dl_SetTaskResult(DlTaskID,Result):
-    theTask=Db_Get_TaskCollection().update({"DlTaskID":UserId},{ $set: { "Result" : Result } } )
+    theTask=Db_Get_TaskCollection().update({"DlTaskID":DlTaskID},{ $set: { "Result" : Result } } )
     
 
 def Db_Dl_EnableTask(DlTaskID,action):
-    theTask=Db_Get_TaskCollection().update({"DlTaskID":UserId},{ $set: { "Enabled" : action } } )
+    theTask=Db_Get_TaskCollection().update({"DlTaskID":DlTaskID},{ $set: { "Enabled" : action } } )
     
 
 
