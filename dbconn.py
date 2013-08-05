@@ -45,7 +45,7 @@ def Db_LogEvent(Event,Details):
     Log["Details"]=Details
     Log["Time"]=time.time()
     Db_Get_LogCollection().insert(Log)
-	pass
+	
 
 
 
@@ -67,13 +67,13 @@ def Db_User_Vef(UserId,UserSecret):
 	else:
 		return dbResult.VerifyUser_Deny
     
-	pass
+	
 
 def Db_User_Disable(UserId,action):
     User=Db_Get_UserCollection().findOne({"UserId":UserId})
     User["Enabled"]=action
     Db_Get_UserCollection().update({"UserId":UserId},{ $set: { "Enabled" : action } } )
-	pass
+	
 
 
 
@@ -84,7 +84,7 @@ def Db_Dl_ListTask(UserId):
         return TaskList
     else:
         return None
-	pass
+	
 
 def Db_Dl_AddTask(weburl,UserId):
     AddingTask={}
@@ -95,29 +95,29 @@ def Db_Dl_AddTask(weburl,UserId):
     Task["AddTime"]=time.time()
     Db_Get_TaskCollection().insert(Task)
     return Task
-	pass
+	
 
 def Db_Dl_GetTaskProgress(DlTaskID):
     theTask=Db_Get_TaskCollection().findOne({"DlTaskID":DlTaskID})
     return theTask["Progress"]
-	pass
+	
 
 def Db_Dl_GetTaskResult(DlTaskID):
     theTask=Db_Get_TaskCollection().findOne({"DlTaskID":DlTaskID})
     return theTask["Result"]
-	pass
+	
 
 def Db_Dl_SetTaskProgress(DlTaskID,Progress):
     theTask=Db_Get_TaskCollection().update({"DlTaskID":UserId},{ $set: { "Progress" : Progress } } )
-    pass
+    
 
 def Db_Dl_SetTaskResult(DlTaskID,Result):
     theTask=Db_Get_TaskCollection().update({"DlTaskID":UserId},{ $set: { "Result" : Result } } )
-    pass
+    
 
 def Db_Dl_EnableTask(DlTaskID,action):
     theTask=Db_Get_TaskCollection().update({"DlTaskID":UserId},{ $set: { "Enabled" : action } } )
-    pass
+    
 
 
 #Downloaded File Management
@@ -128,7 +128,7 @@ def Db_File_CreateCombination(DlTaskID,File):
     else:
         FileList=[File]
     Db_Get_FileCollection().update({"DlTaskID":DlTaskID},{$set:{"Filelist":Filelist}})
-	pass
+	
 
 def Db_File_ListCombinated(DlTaskID):
 	pass
