@@ -46,7 +46,7 @@ class NewUser(BaseHandler):
         UserInfomation=webreq.Req_NewUser()
 
 
-        if self.try_update_model(UserInfomation):
+        if not self.try_update_model(UserInfomation):
             Error={}
             Error["Success"]="NO"
             Error["Reason"]="Unacceptable_Data"
@@ -55,7 +55,7 @@ class NewUser(BaseHandler):
         User=coreMan.User_Add(UserInfomation.UserEmail)
         Respond["Success"]="YES"
         Respond["User"]=User
-
+        User["_id"]=str(User["_id"])
         return self.json_response(Respond)
 
 class NewTask(BaseHandler):
@@ -66,7 +66,7 @@ class NewTask(BaseHandler):
         DlInfomation=webreq.Req_Dl()
 
 
-        if self.try_update_model(DlInfomation):
+        if not self.try_update_model(DlInfomation):
             Error={}
             Error["Success"]="NO"
             Error["Reason"]="Unacceptable_Data"
@@ -91,6 +91,14 @@ class UserDisable(BaseHandler):
         response = HTTPResponse()
         Respond={}
         DisableUserInfomation=webreq.Req_DisableUser()
+
+        if not self.try_update_model(DisableUserInfomation):
+            Error={}
+            Error["Success"]="NO"
+            Error["Reason"]="Unacceptable_Data"
+            return self.json_response(Error)
+        
+
 
         if coreMan.User_Verify(DisableUserInfomation.UserID,DisableUserInfomation.UserSecret) != dbResult.VerifyUser_Success:
             Error={}
@@ -126,7 +134,7 @@ class ListTask(BaseHandler):
         GetDlResultInfomation=webreq.Req_GetDlResult()
 
 
-        if self.try_update_model(GetDlResultInfomation):
+        if not self.try_update_model(GetDlResultInfomation):
             Error={}
             Error["Success"]="NO"
             Error["Reason"]="Unacceptable_Data"
@@ -170,7 +178,7 @@ class AchiveTask(BaseHandler):
         AchieveInfomation=webreq.Req_AchieveFile()
 
 
-        if self.try_update_model(AchieveInfomation):
+        if not self.try_update_model(AchieveInfomation):
             Error={}
             Error["Success"]="NO"
             Error["Reason"]="Unacceptable_Data"

@@ -180,8 +180,9 @@ Core_NewUser=function (UserEmail,SuccCallback,FailCallBack) {
     });
 
     Core_NewUser_ReqAJAX.done(function(msg) {
-        console.log( "Core_NewUser_Reqsucc"+msg );
-        ServerRespond=$.parseJSON(msg)
+        console.log( "Core_NewUser_Reqsucc");
+        console.log( msg );
+        ServerRespond=msg
         if(ServerRespond.Success!="YES"){
             FailCallBack(ServerRespond.Reason)
         }

@@ -10,31 +10,31 @@ import genFileList
 #DataBase Connection Create
 def Db_Get_LogCollection():
     client = MongoClient(configure.The_MongoDB_URL)
-    db = client[The_MongoDB_Db]
+    db = client[configure.The_MongoDB_Db]
     collection = db['Log']
     return collection
 
 def Db_Get_UserCollection():
     client = MongoClient(configure.The_MongoDB_URL)
-    db = client[The_MongoDB_Db]
+    db = client[configure.The_MongoDB_Db]
     collection = db['User']
     return collection
 
 def Db_Get_TaskCollection():
     client = MongoClient(configure.The_MongoDB_URL)
-    db = client[The_MongoDB_Db]
+    db = client[configure.The_MongoDB_Db]
     collection = db['Task']
     return collection
 
 def Db_Get_FileCollection():
     client = MongoClient(configure.The_MongoDB_URL)
-    db = client[The_MongoDB_Db]
+    db = client[configure.The_MongoDB_Db]
     collection = db['File']
     return collection
 
 def Db_Get_StatusCollection():
     client = MongoClient(configure.The_MongoDB_URL)
-    db = client[The_MongoDB_Db]
+    db = client[configure.The_MongoDB_Db]
     collection = db['Status']
     return collection
 
