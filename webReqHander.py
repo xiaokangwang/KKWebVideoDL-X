@@ -34,6 +34,7 @@ class GetServerStatusHandler(BaseHandler):
         fd=os.statvfs(os.getcwd())
         fdhr=(fd.f_bavail * fd.f_frsize) / 1024
         ServerStatus["FreeSpace"]=fdhr
+        ServerStatus["Status"]=coreMan.Status_Get()
         return self.json_response(ServerStatus)
         
 
