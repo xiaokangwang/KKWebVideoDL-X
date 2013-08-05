@@ -122,7 +122,6 @@ class ListTask(BaseHandler):
 
     def post(self):
         response = HTTPResponse()
-        Respond={}
         GetDlResultInfomation=webreq.Req_GetDlResult()
 
 
