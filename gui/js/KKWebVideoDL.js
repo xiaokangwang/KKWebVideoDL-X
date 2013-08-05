@@ -193,3 +193,31 @@ Core_NewUser=function (UserEmail,SuccCallback,FailCallBack) {
         FailCallBack("AJAX_FAIL")
     })
 }
+
+
+Core_GetServerStatus=function (SuccCallback,FailCallBack) {
+    var Core_NewUser_ReqAJAX=$.ajax({
+        url:"/NewUser",
+        async:true,
+        cache:false,
+        timeout:30000,
+        type:"POST",
+        data: "",
+    });
+
+    Core_NewUser_ReqAJAX.done(function(msg) {
+        console.log( "Core_GetServerStatus_Reqsucc");
+        console.log( msg );
+        ServerRespond=msg
+        if(ServerRespond.Success!="YES"){
+            FailCallBack(ServerRespond.Reason)
+        }else{
+            SuccCallback(msg)
+        }
+    });
+
+    Core_NewUser_ReqAJAX.fail(function(jqXHR, textStatus) {
+        console.log( "Core_GetServerStatus_Reqfail: " + textStatus );
+        FailCallBack("AJAX_FAIL")
+    })
+}
