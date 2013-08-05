@@ -1,5 +1,6 @@
 import dbconn
 import eventID
+import os
 
 ###
 ###User
@@ -27,7 +28,7 @@ def Task_Add(weburl,UserId):
 	Task=dbconn.Db_Dl_AddTask(weburl,UserId)
 	dbconn.Db_LogEvent(eventID.AddTask,Task)
 	return Task
-	
+
 def Task_List(UserID):
 	return dbconn.Db_Dl_ListTask(UserID)
 
@@ -46,6 +47,9 @@ def Task_SetResult(DlTaskID,Progress):
 def Task_Enable(DlTaskID,action):
 	return dbconn.Db_Dl_EnableTask(DlTaskID,action)
 
+def Task_GetUserID(DlTaskID):
+	return dbconn.Db_Dl_GetTaskOwner(DlTaskID)
+
 ###
 ###File
 ###
@@ -60,9 +64,25 @@ def File_ListCombinated(DlTaskID):
 def File_ReverseLookupTaskIDByFileName(DlTaskID):
 	return dbconn.Db_ReverseLookupTaskIDByFileName(DlTaskID)
 
+def File_Achive(DlTaskID,Operater):
+	FileToAchieves=dbconn.Db_File_ListCombinated(DlTaskID)
+
+    for FileToAchieveItem in FileToAchieves:
+    	os.unlink(FileToAchieves["FileName"])
+   
+    dbconn.Db_LogEvent(eventID.AchivedFile,{"DlTaskID"=DlTaskID,"Operater"=Operater})
+
+	return dbconn.Db_File_AchivedTask(DlTaskID)
+
+###
+###Status
+###
+
 def Status_Set(StatusID,Operater):
 	dbconn.Db_Server_SetStatus(StatusID)
 	dbconn.Db_LogEvent(eventID.SetStatus,{"StatusID"=StatusID,"Operater"=Operater})
 
 def Status_Get():
 	return dbconn.Db_Server_GetStatus()
+
+

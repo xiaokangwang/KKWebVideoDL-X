@@ -161,3 +161,42 @@ class ListTask(BaseHandler):
             ListingTaskWithResult.append(Taskitemx)
 
         return self.json_response(ListingTaskWithResult)
+
+class AchiveTask(BaseHandler):
+
+    def post(self):
+        response = HTTPResponse()
+        Respond={}
+        AchieveInfomation=webreq.Req_AchieveFile()
+
+
+        if self.try_update_model(AchieveInfomation):
+            Error={}
+            Error["Success"]="NO"
+            Error["Reason"]="Unacceptable_Data"
+            return self.json_response(Error)
+
+        if coreMan.User_Verify(AchieveInfomation.UserID,AchieveInfomation.UserSecret) != dbResult.VerifyUser_Success:
+            Error={}
+            Error["Success"]="NO"
+            Error["Reason"]="Authentication_failure"
+            Error["Detail"]= coreMan.User_Verify(AchieveInfomation.UserID,AchieveInfomation.UserSecret)
+            return self.json_response(Error)
+        
+        Reason=""
+
+        if AchieveInfomation.UserID[0] != "#":
+            if AchieveInfomation.UserID != coreMan.Task_GetUserID(AchieveInfomation.TaskID):
+                Error={}
+                Error["Success"]="NO"
+                Error["Reason"]="Permission_Denied"
+                return self.json_response(Error)
+            else Reason="Achieve_Self"
+        else:
+            Reason="Achieve_ADMIN"
+
+
+        Task=coreMan.File_Achive(AchieveInfomation.TaskID,AchieveInfomation.UserID)
+        Respond["Success"]="YES"
+
+        return self.json_response(Respond)

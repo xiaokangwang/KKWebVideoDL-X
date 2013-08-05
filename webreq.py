@@ -33,3 +33,10 @@ class Req_GetDlResult(object):
     def __init__(self,UserId=u(''), UserSecret=u('')):
         self.UserId = UserId
         self.UserSecret = UserSecretID
+
+class Req_AchieveFile(object):
+
+    def __init__(self,DlTaskID=u(''),UserId=u(''), UserSecret=u('')):
+        self.UserId = UserId
+        self.UserSecret = UserSecret
+        self.DlTaskID = DlTaskID

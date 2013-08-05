@@ -118,6 +118,10 @@ def Db_Dl_SetTaskResult(DlTaskID,Result):
 
 def Db_Dl_EnableTask(DlTaskID,action):
     theTask=Db_Get_TaskCollection().update({"DlTaskID":DlTaskID},{ $set: { "Enabled" : action } } )
+
+def Db_Dl_GetTaskOwner(DlTaskID):
+    theTask=Db_Get_TaskCollection().findOne({"DlTaskID":DlTaskID})
+    return theTask["UserId"]
     
 
 
