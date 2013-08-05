@@ -80,5 +80,5 @@ class NewTask(BaseHandler):
         Respond["Success"]="YES"
         Respond["Task"]=Task
 
-        return self.json_response(Respond
+        return self.json_response(Respond)
 
