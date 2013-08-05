@@ -131,6 +131,8 @@ def Db_File_CreateCombination(DlTaskID,File):
 	
 
 def Db_File_ListCombinated(DlTaskID):
+    Filelist=Db_Get_FileCollection().findOne({"DlTaskID":DlTaskID})
+    return Filelist["Filelist"]
 	pass
 
 def Db_File_ReverseLookupTaskIDByFileName(FileName):
