@@ -5,6 +5,7 @@ import eventID
 import genUserID
 import dbResult
 import genTaskID
+import genFileList
 
 #DataBase Connection Create
 def Db_Get_LogCollection():
@@ -123,20 +124,20 @@ def Db_Dl_EnableTask(DlTaskID,action):
 #Downloaded File Management
 def Db_File_CreateCombination(DlTaskID,File):
     Filelist=Db_Get_FileCollection().findOne({"DlTaskID":DlTaskID})
-    if Filelist["FileList"] is not None:
+    if Filelist is not None:
         Db_Get_FileCollection().update({"DlTaskID":DlTaskID},{ $push : { "FileList" : {File} } })
     else:
-        FileList=[File]
-    Db_Get_FileCollection().update({"DlTaskID":DlTaskID},{$set:{"FileList":Filelist}})
+        FileList=genFileList.genFileList(DlTaskID)
+    Db_Get_FileCollection().insert(FileList)
 	
 
 def Db_File_ListCombinated(DlTaskID):
     Filelist=Db_Get_FileCollection().findOne({"DlTaskID":DlTaskID})
     return Filelist["Filelist"]
-	pass
 
 def Db_File_ReverseLookupTaskIDByFileName(FileName):
-	pass
+    Filelist=Db_Get_FileCollection().find({"FileList":FileName})
+	return Filelist
 
 def Db_File_AchivedTask(DlTaskID):
 	pass
