@@ -168,3 +168,27 @@ $('#Get_a_User_Dig_No_PWUN_reason').on('hidden.bs.popover', function () {
     $("#Get_a_User_Dig_No_PWUN_reason").fadeOut(1000);
 })
 
+
+Core_NewUser=function (UserEmail,SuccCallback,FailCallBack) {
+    var Core_NewUser_ReqAJAX=$.ajax({
+        url:"/NewUser",
+        async:true,
+        cache:false,
+        timeout:30000,
+        type:"POST",
+        data: "UserEmail="+UserEmail,
+    });
+
+    Core_NewUser_ReqAJAX.done(function(msg) {
+        console.log( "Core_NewUser_Reqsucc"+msg );
+        ServerRespond=$.parseJSON(msg)
+        if(ServerRespond.Success!="YES"){
+            FailCallBack(ServerRespond.Reason)
+        }
+    });
+
+    Core_NewUser_ReqAJAX.fail(function(jqXHR, textStatus) {
+        console.log( "Core_NewUser_Reqfail: " + textStatus );
+        FailCallBack("AJAX_FAIL")
+    })
+}
