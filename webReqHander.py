@@ -10,11 +10,13 @@ import ctypes
 import os
 import platform
 import sys
+import time
 
 import webreq
 import version
 import coreMan
 import dbResult
+import configure
 
 class PingHandler(BaseHandler):
 
@@ -113,3 +115,48 @@ class UserDisable(BaseHandler):
 
         Respond["Success"]="YES"
         return self.json_response(Respond)
+
+
+class ListTask(BaseHandler):
+
+    def post(self):
+        response = HTTPResponse()
+        Respond={}
+        GetDlResultInfomation=webreq.Req_GetDlResult()
+
+
+        if self.try_update_model(GetDlResultInfomation):
+            Error={}
+            Error["Success"]="NO"
+            Error["Reason"]="Unacceptable_Data"
+            return self.json_response(Error)
+
+        if coreMan.User_Verify(GetDlResultInfomation.UserID,GetDlResultInfomation.UserSecret) != dbResult.VerifyUser_Success:
+            Error={}
+            Error["Success"]="NO"
+            Error["Reason"]="Authentication_failure"
+            Error["Detail"]= coreMan.User_Verify(DlInfomation.UserID,DlInfomation.UserSecret)
+            return self.json_response(Error)
+
+
+        Tasks=coreMan.Task_List(GetDlResultInfomation.UserID)
+        
+        ListingTask=[]
+
+        for TaskItem in Tasks:
+            if TaskItem["Addtime"]+configure.Task_show_time >= time.time() :
+                ListingTask.append(TaskItem)
+
+        ListingTaskWithResult=[]
+
+        for ListingTask in Taskitem:
+            Taskitemx={}
+            Taskitemx["Addtime"]=Taskitem["Addtime"]
+            Taskitemx["weburl"]=Taskitem["weburl"]
+            Taskitemx["Enabled"]=Taskitem["Enabled"]
+            Taskitemx["ProgressN"]=coreMan.Task_GetProgress(Taskitem["TaskID"])["Numb"]
+            Taskitemx["ProgressD"]=coreMan.Task_GetProgress(Taskitem["TaskID"])["Detail"]
+            Taskitemx["Result"]=coreMan.Task_GetResult(Taskitem["TaskID"])
+            ListingTaskWithResult.append(Taskitemx)
+
+        return self.json_response(ListingTaskWithResult)

@@ -21,3 +21,6 @@ User_immediate_Enable=1
 
 #immediate Enable
 Task_immediate_Enable=1
+
+#time to show Task(in second)
+Task_show_time=604800 #5d

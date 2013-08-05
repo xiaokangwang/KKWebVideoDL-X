@@ -27,6 +27,9 @@ def Task_Add(weburl,UserId):
 	Task=dbconn.Db_Dl_AddTask(weburl,UserId)
 	dbconn.Db_LogEvent(eventID.AddTask,Task)
 	return Task
+	
+def Task_List(UserID):
+	return dbconn.Db_Dl_ListTask(UserID)
 
 def Task_GetProgress(DlTaskID):
 	return dbconn.Db_Dl_GetTaskProgress(DlTaskID)
