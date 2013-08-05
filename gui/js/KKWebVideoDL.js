@@ -171,7 +171,7 @@ $('#Get_a_User_Dig_No_PWUN_reason').on('hidden.bs.popover', function () {
 
 Core_NewUser=function (UserEmail,SuccCallback,FailCallBack) {
     var Core_NewUser_ReqAJAX=$.ajax({
-        url:"/NewUser",
+        url:"NewUser",
         async:true,
         cache:false,
         timeout:30000,
@@ -197,7 +197,7 @@ Core_NewUser=function (UserEmail,SuccCallback,FailCallBack) {
 
 Core_GetServerStatus=function (SuccCallback,FailCallBack) {
     var Core_NewUser_ReqAJAX=$.ajax({
-        url:"/NewUser",
+        url:"GetServerStatus",
         async:true,
         cache:false,
         timeout:30000,
