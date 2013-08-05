@@ -18,6 +18,9 @@ AddTask="KKWebVideoDL_EventID_Task_Add"
 
 #File
 
+#Create
+CreateFile="KKWebVideoDL_EventID_File_Create"
+
 #Achive
 AchivedFile="KKWebVideoDL_EventID_File_Achived"
 
