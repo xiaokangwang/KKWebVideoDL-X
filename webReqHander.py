@@ -107,7 +107,8 @@ class UserDisable(BaseHandler):
                 Error["Success"]="NO"
                 Error["Reason"]="Permission_Denied"
                 return self.json_response(Error)
-            else Reason="Disable_Self"
+            else :
+                Reason="Disable_Self"
         else:
             Reason="Disable_ADMIN"
 
@@ -190,7 +191,8 @@ class AchiveTask(BaseHandler):
                 Error["Success"]="NO"
                 Error["Reason"]="Permission_Denied"
                 return self.json_response(Error)
-            else Reason="Achieve_Self"
+            else :
+                Reason="Achieve_Self"
         else:
             Reason="Achieve_ADMIN"
 
