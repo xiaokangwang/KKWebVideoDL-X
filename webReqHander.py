@@ -156,7 +156,7 @@ class ListTask(BaseHandler):
             Taskitemx["Enabled"]=Taskitem["Enabled"]
             Taskitemx["ProgressN"]=coreMan.Task_GetProgress(Taskitem["TaskID"])["Numb"]
             Taskitemx["ProgressD"]=coreMan.Task_GetProgress(Taskitem["TaskID"])["Detail"]
-            Taskitemx["Result"]=coreMan.Task_GetResult(Taskitem["TaskID"])
+            Taskitemx["ResultF"]=coreMan.File_ListCombinated(Taskitem["TaskID"])
             ListingTaskWithResult.append(Taskitemx)
 
         return self.json_response(ListingTaskWithResult)
