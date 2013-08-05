@@ -121,7 +121,13 @@ def Db_Dl_EnableTask(DlTaskID,action):
 
 
 #Downloaded File Management
-def Db_File_CreateCombination(DlTaskID,FileName):
+def Db_File_CreateCombination(DlTaskID,File):
+    Filelist=Db_Get_FileCollection().findOne({"DlTaskID":DlTaskID})
+    if Filelist["Filelist"] is not None:
+        Db_Get_FileCollection().update({"DlTaskID":DlTaskID},{ $push : { "FileList" : {File} } })
+    else:
+        FileList=[File]
+    Db_Get_FileCollection().update({"DlTaskID":DlTaskID},{$set:{"Filelist":Filelist}})
 	pass
 
 def Db_File_ListCombinated(DlTaskID):
