@@ -185,6 +185,8 @@ Core_NewUser=function (UserEmail,SuccCallback,FailCallBack) {
         ServerRespond=msg
         if(ServerRespond.Success!="YES"){
             FailCallBack(ServerRespond.Reason)
+        }else{
+            SuccCallback(msg);
         }
     });
 
@@ -196,7 +198,7 @@ Core_NewUser=function (UserEmail,SuccCallback,FailCallBack) {
 
 
 Core_GetServerStatus=function (SuccCallback,FailCallBack) {
-    var Core_NewUser_ReqAJAX=$.ajax({
+    var Core_GetServerStatus_ReqAJAX=$.ajax({
         url:configure_KKWebVideoDL_API_Base_URL+"GetServerStatus",
         async:true,
         cache:false,
@@ -205,7 +207,7 @@ Core_GetServerStatus=function (SuccCallback,FailCallBack) {
         data: "",
     });
 
-    Core_NewUser_ReqAJAX.done(function(msg) {
+    Core_GetServerStatus_ReqAJAX.done(function(msg) {
         console.log( "Core_GetServerStatus_Reqsucc");
         console.log( msg );
         ServerRespond=msg
@@ -216,23 +218,23 @@ Core_GetServerStatus=function (SuccCallback,FailCallBack) {
         }
     });
 
-    Core_NewUser_ReqAJAX.fail(function(jqXHR, textStatus) {
+    Core_GetServerStatus_ReqAJAX.fail(function(jqXHR, textStatus) {
         console.log( "Core_GetServerStatus_Reqfail: " + textStatus );
         FailCallBack("AJAX_FAIL")
     })
 }
 
 Core_UserDisable=function (TargetUserID,UserID,UserSecret,SuccCallback,FailCallBack) {
-    var Core_NewUser_ReqAJAX=$.ajax({
+    var Core_UserDisable_ReqAJAX=$.ajax({
         url:configure_KKWebVideoDL_API_Base_URL+"UserDisable",
         async:true,
         cache:false,
         timeout:30000,
         type:"POST",
-        data: "",
+        data: "TargetUserID="+TargetUserID+"&UserID="+UserID+"&UserSecret="+UserSecret,
     });
 
-    Core_NewUser_ReqAJAX.done(function(msg) {
+    Core_UserDisable_ReqAJAX.done(function(msg) {
         console.log( "Core_UserDisable_Reqsucc");
         console.log( msg );
         ServerRespond=msg
@@ -243,7 +245,7 @@ Core_UserDisable=function (TargetUserID,UserID,UserSecret,SuccCallback,FailCallB
         }
     });
 
-    Core_NewUser_ReqAJAX.fail(function(jqXHR, textStatus) {
+    Core_UserDisable_ReqAJAX.fail(function(jqXHR, textStatus) {
         console.log( "Core_UserDisable_Reqfail: " + textStatus );
         FailCallBack("AJAX_FAIL")
     })
@@ -251,17 +253,150 @@ Core_UserDisable=function (TargetUserID,UserID,UserSecret,SuccCallback,FailCallB
 
 
 Core_initLang=function(lang){
+    if(sessionStorage.langtrs==undefined||lang!=sessionStorage.langtrslt){
     var initLang_AJAX=$.ajax({
         dataType: "json",
         url: 'ajax/lang_'+lang+'.json',
-        async:true,
-
+        async:false,
     }
     ).done(function(langms){
         sessionStorage.langtrs=JSON.stringify(langms);});
 
+    }
+    sessionStorage.langtrslt=lang
 }
 
 Core_Lang_Out=function(shortdes){
     return JSON.parse(sessionStorage.langtrs)[shortdes];
 }
+
+Core_Lang_Out_pack=function(shortdes){
+    return JSON.parse(sessionStorage.langtrs);
+}
+
+
+Core_ListTask=function (UserID,UserSecret,SuccCallback,FailCallBack) {
+    var Core_ListTask_ReqAJAX=$.ajax({
+        url:configure_KKWebVideoDL_API_Base_URL+"ListTask",
+        async:true,
+        cache:false,
+        timeout:30000,
+        type:"POST",
+        data: "UserID="+UserID+"&UserSecret="+UserSecret,
+    });
+
+    Core_ListTask_ReqAJAX.done(function(msg) {
+        console.log( "Core_ListTask_Reqsucc");
+        console.log( msg );
+        ServerRespond=msg
+        if(ServerRespond.Success!="YES"){
+            FailCallBack(ServerRespond.Reason)
+        }else{
+            SuccCallback(msg)
+        }
+    });
+
+    Core_ListTask_ReqAJAX.fail(function(jqXHR, textStatus) {
+        console.log( "Core_ListTask_Reqfail: " + textStatus );
+        FailCallBack("AJAX_FAIL")
+    })
+}
+
+
+Core_AchiveTask=function (UserID,UserSecret,SuccCallback,FailCallBack) {
+    var Core_AchiveTask_ReqAJAX=$.ajax({
+        url:configure_KKWebVideoDL_API_Base_URL+"AchiveTask",
+        async:true,
+        cache:false,
+        timeout:30000,
+        type:"POST",
+        data: "UserID="+UserID+"&UserSecret="+UserSecret,
+    });
+
+    Core_AchiveTask_ReqAJAX.done(function(msg) {
+        console.log( "Core_AchiveTask_Reqsucc");
+        console.log( msg );
+        ServerRespond=msg
+        if(ServerRespond.Success!="YES"){
+            FailCallBack(ServerRespond.Reason)
+        }else{
+            SuccCallback(msg)
+        }
+    });
+
+    Core_AchiveTask_ReqAJAX.fail(function(jqXHR, textStatus) {
+        console.log( "Core_AchiveTask_Reqfail: " + textStatus );
+        FailCallBack("AJAX_FAIL")
+    })
+}
+
+User_LoadLang=function(){
+    if(localStorage.langperf==undefined){
+        localStorage.langperf=configure_KKWebVideoDL_User_lang_def;
+    }
+
+    Core_initLang(localStorage.langperf);
+
+}
+
+User_LoadLang();
+
+User_SetLang=function(langtoset){
+    localStorage.langperf=langtoset;
+    sessionStorage.langtrs="";
+    sessionStorage.langtrslt="";
+    location.reload();
+}
+
+User_toConnect=function(UserID,UserSecret){
+    localStorage.UserID=UserID;
+    localStorage.UserSecret=UserSecret;
+
+}
+
+User_disConnect=function(){
+    localStorage.UserID="";
+    localStorage.UserSecret="";
+
+}
+
+User_isConnected=function(){
+    if((localStorage.UserID==undefined||localStorage.UserID=="")&&(localStorage.UserSecret==undefined||localStorage.UserSecret=="")){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+
+var KKWebVideoDLApp = angular.module('KKWebVideoDLApp', []);
+
+KKWebVideoDLApp.controller('MainCtrl', function($scope) {
+    var Langpack=Core_Lang_Out_pack();
+
+  for(LangID in Langpack){
+    $scope["UI_"+LangID]=Langpack[LangID];
+  }
+  $scope.tavlangs=configure_KKWebVideoDL_avlang;
+  $scope.toReConnect=function(){
+    User_toConnect($scope.Reconnect_input_ID,$scope.Reconnect_input_Secret);
+  };
+
+  $scope.NewAccount=function(){
+    $("#Get_a_User_Dig_sub").attr("disabled", "disabled");
+    $("#Get_a_User_Dig_sub").html('.....<span class="glyphicon glyphicon-time"></span>.....');
+    Core_NewUser($scope.CreateAccount_input_Email,
+        function(UserData){
+            User_toConnect(UserData.User.UserID,UserData.User.UserSecret);
+            $("#Get_a_User_Dig").modal("hide");
+            $scope.isloggedin=true;
+            $("#container_ExistingUser").fadeOut(1000);
+            $("#container_NewUser").fadeOut(1000);
+
+    })
+
+  }
+  $scope.isloggedin=User_isConnected();
+
+
+});

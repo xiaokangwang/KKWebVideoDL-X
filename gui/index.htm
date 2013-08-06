@@ -6,75 +6,76 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-glyphicons.css" rel="stylesheet" media="screen">
   </head>
-  <body ng-app>
+  <body ng-app="KKWebVideoDLApp"  ng-controller="MainCtrl" >
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        <a href="index.htm" class="navbar-brand">KKDEVWebVideo-X</a>
+        <a href="index.htm" class="navbar-brand">{{UI_webpage_top_title}}</a>
       </div>
     </div>
 
   
-    <div style="border:50px solid;border-color:#FFFFFF">
+    <div style="border:50px solid;border-color:#FFFFFF"   >
       <div class="container">
-        <h1>A Video Downloader of Video over the web</h1>
-        <p>Something help you download Video~</p>
+        <h1>{{UI_webpage_bigbigt_title}}</h1>
+        <p>{{UI_webpage_bigbigt_title_describ}}</p>
       </div>
     </div>
 
+<!-- New User -->
 
-  <div class="container">
+  <div class="container" ng-hide="isloggedin" id="container_NewUser">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Get a User</h3>
+        <h3 class="panel-title"  id="Get_a_User_Learm_title"  >{{ UI_Get_a_User_Learm_penel_title }}</h3>
       </div>
-      <button type="button" class="btn btn-primary btn-large btn-block" id="Get_a_User_Btn" style="border:12px solid;border-color:#FFFFFF">Create Account</button>
-      <button type="button" class="btn btn-link"  id="Get_a_User_Learm_more_tigger"  style="margin-left:85%">Learn More</button>
+      <button type="button" class="btn btn-primary btn-large btn-block" id="Get_a_User_Btn" style="border:12px solid;border-color:#FFFFFF"   >{{ UI_Get_a_User_Learm_penel_main_btn }}</button>
+      <button type="button" class="btn btn-link"  id="Get_a_User_Learm_more_tigger"  style="margin-left:85%">{{UI_Get_a_User_Learm_more_tigger}}</button>
       <div class="accordion" id="Get_a_User_Learm_more_data">
         <div class="accordion-group">
           <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#Get_a_User_Learm_more_data" href="#collapseOne">
-                Things We Collected
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#Get_a_User_Learm_more_data" href="#collapseOne" >
+                {{UI_Get_a_User_Learm_more_data_collapseOne_title}}
               </a>
           </div>
         <div id="collapseOne" class="accordion-body collapse in">
-          <div class="accordion-inner">
-          ...
+          <div class="accordion-inner"  >
+          {{UI_Get_a_User_Learm_more_data_collapseOne_content}}
           </div>
         </div>
       </div>
       <div class="accordion-group">
         <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#Get_a_User_Learm_more_data" href="#collapseTwo">
-            Rights We Reserved
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#Get_a_User_Learm_more_data" href="#collapseTwo"  >
+            {{UI_Get_a_User_Learm_more_data_collapseTwo_title}}
           </a>
         </div>
       <div id="collapseTwo" class="accordion-body collapse">
-        <div class="accordion-inner">
+        <div class="accordion-inner"  >
           ...
         </div>
       </div>
     </div>
     <div class="accordion-group">
       <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#Get_a_User_Learm_more_data" href="#collapseThree">
-          Anti-Abuse
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#Get_a_User_Learm_more_data" href="#collapseThree"  >
+          {{UI_Get_a_User_Learm_more_data_collapseThree_title}}
         </a>
       </div>
     <div id="collapseThree" class="accordion-body collapse">
-        <div class="accordion-inner">
-         ...
+        <div class="accordion-inner"  >
+         {{UI_Get_a_User_Learm_more_data_collapseThree_content}}
         </div>
       </div>
     </div>
      <div class="accordion-group">
       <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#Get_a_User_Learm_more_data" href="#collapseFour">
-          User Agreement
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#Get_a_User_Learm_more_data" href="#collapseFour"  >
+          {{UI_Get_a_User_Learm_more_data_collapseFour_title}}
         </a>
       </div>
     <div id="collapseFour" class="accordion-body collapse">
-        <div class="accordion-inner">
-         ...
+        <div class="accordion-inner"  >
+         {{UI_Get_a_User_Learm_more_data_collapseFour_content}}
         </div>
       </div>
     </div> 
@@ -83,28 +84,92 @@
   </div>
 
 
+<!-- Language -->
+
+  <div class="container">
+  <div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{UI_Langpanel_title}}</h3>
+    </div>
+       <ul class="list-group">
+        <li class="list-group-item" ng-repeat="langspick in tavlangs" ><a onclick="User_SetLang('{{langspick.id}}');"> {{langspick.name}}</a>></li>
+</ul>
+  </div>
+    </div>
+
+
+<!-- Existing User -->
+
+  <div class="container" ng-hide="isloggedin" id="container_ExistingUser">
+  <div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{UI_panel_reconnect_title}}</h3>
+    </div>
+       
+      <form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputID" class="col-lg-2 control-label">{{UI_panel_reconnect_UserID}}</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="inputID" ng-model="Reconnect_input_ID"  placeholder="{{UI_panel_reconnect_UserID_placeholder}}">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputUserSecret" class="col-lg-2 control-label" >{{UI_panel_reconnect_UserSecret}}</label>
+    <div class="col-lg-10">
+      <textarea row=3 type="text" class="form-control" id="inputUserSecret" ng-model="Reconnect_input_Secret" placeholder="{{UI_panel_reconnect_UserSecret_placeholder}}"></textarea>
+    </div>
+  </div>
+    <div class="form-group">
+    </div>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-10">
+      <button  class="btn btn-default" ng-click="toReConnect();" >{{UI_panel_reconnect_commit}}</button>
+      </div>
+    </div>
+  </form>
+  </div>
+    </div>
+
+
+<!-- Server Status -->
+
+  <div class="container" >
+    <div class="panel">
+      <div class="panel-heading">
+      <h3 class="panel-title">{{UI_panel_Server_Status_title}}</h3>
+      </div>
+        Panel content
+      <div class="panel-footer">{{UI_OpenSource_support}}</div>
+  </div>
+  </div>
+
+
+
+<!-- New User dig -->
+
   <div class="modal fade" id="Get_a_User_Dig">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Create a account</h4>
+          <h4 class="modal-title"  > {{UI_Get_a_User_Dig_modal_title}} </h4>
         </div>
         <div class="modal-body">
-          <p class="text-primary">Your Email:</p>
+          <p class="text-primary"  >{{UI_Get_a_User_Dig_modal_content_AskForEmail}} </p>
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-              <input type="email" class="form-control" placeholder="Email">
+              <input type="email" class="form-control" ng-model="CreateAccount_input_Email" placeholder="{{UI_Get_a_User_Dig_Email_input}}">
           </div>
-          <p class="text-info">Nothings else...No username or passowrd is requied.<a data-toggle="popover" id="Get_a_User_Dig_No_PWUN_reason" data-placement="left" data-content="We store data verify your ownership of account on your browser.It is safer that way." data-original-title >Why?</a></p>
+          <p class="text-info"   >{{UI_Get_a_User_Dig_modal_content_No_PWUN}} <a data-toggle="popover" id="Get_a_User_Dig_No_PWUN_reason" data-placement="left" data-content="{{UI_Get_a_User_Dig_modal_content_No_PWUN_exp}}" data-original-title >{{UI_Get_a_User_Dig_modal_content_No_PWUN_exp_trigger}}</a></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn" id="Get_a_User_Dig_Close">Close</button>
-          <button type="button" class="btn btn-primary">Accept User Agreement and Create Account</button>
+          <button type="button" class="btn" id="Get_a_User_Dig_Close" >{{UI_Get_a_User_Dig_Close_text}}</button>
+          <button type="button" id="Get_a_User_Dig_sub"  class="btn btn-primary" ng-click="NewAccount();"  >{{UI_Get_a_User_Dig_Close_Apply}}</button>
         </div>
       </div>
     </div>
   </div>
+
 
 
 
