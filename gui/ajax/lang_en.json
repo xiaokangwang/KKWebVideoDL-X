@@ -1,6 +1,6 @@
 {
 	"Unacceptable_Data":"Server cannot understand the data we sent it.",
 	"Authentication_failure":"The token you used to login wasn't accepted by Server.",
-	"Permission_Denied":"You are doing something beyond your rights.",
+	"Permission_Denied":"You are doing something beyond your rights."
 
 }
