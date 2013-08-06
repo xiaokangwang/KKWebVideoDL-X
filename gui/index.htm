@@ -92,7 +92,7 @@
         <h3 class="panel-title">{{UI_Langpanel_title}}</h3>
     </div>
        <ul class="list-group">
-        <li class="list-group-item" ng-repeat="langspick in tavlangs" ><a onclick="User_SetLang('{{langspick.id}}');"> {{langspick.name}}</a>></li>
+        <li class="list-group-item" ng-repeat="langspick in tavlangs" ><a onclick="User_SetLang('{{langspick.id}}');">{{langspick.name}}</a>></li>
 </ul>
   </div>
     </div>
@@ -134,15 +134,17 @@
 <!-- Server Status -->
 
   <div class="container" >
-    <div class="panel">
+    <div class="panel" id="Server_Status_panel">
       <div class="panel-heading">
       <h3 class="panel-title">{{UI_panel_Server_Status_title}}</h3>
       </div>
+        <div id="Server_Status_panel_content">
         <ul class="list-group">
             <li class="list-group-item" > {{UI_ServerStatus_FreeSpace}} : {{ServerStatus.FreeSpace}} MB </li>
             <li class="list-group-item" > {{UI_ServerStatus_Version}} : {{ServerStatus.Version}}  </li>
             <li class="list-group-item" > {{UI_ServerStatus_Status}} : {{ServerStatus.Status}}  </li>
         </ul>
+        </div>
         <!-- This statement MUSTN'T be removed. -->
       <div class="panel-footer">{{UI_OpenSource_support}}</div>
   </div>

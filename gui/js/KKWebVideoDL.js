@@ -266,7 +266,7 @@ Core_Lang_Out=function(shortdes){
     return JSON.parse(sessionStorage.langtrs)[shortdes];
 }
 
-Core_Lang_Out_pack=function(shortdes){
+Core_Lang_Out_pack=function(){
     return JSON.parse(sessionStorage.langtrs);
 }
 
@@ -376,6 +376,9 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
   $scope.tavlangs=configure_KKWebVideoDL_avlang;
   $scope.toReConnect=function(){
     User_toConnect($scope.Reconnect_input_ID,$scope.Reconnect_input_Secret);
+            if(User_isConnected()){
+            $scope.isloggedin=true;}
+
   };
 
   $scope.NewAccount=function(){
@@ -398,6 +401,10 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
         $scope.ServerStatus=data;
         $scope.$apply();
         $timeout($scope.UpdSS,5000);
+    },function() {
+        $("#Server_Status_panel").addClass("panel-danger");
+        $("#Server_Status_panel_content").html($scope["UI_ServerStatus_Status_Crashed"]);
+        $scope.$apply();
     });
  
   }
