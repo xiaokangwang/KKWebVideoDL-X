@@ -248,3 +248,20 @@ Core_UserDisable=function (TargetUserID,UserID,UserSecret,SuccCallback,FailCallB
         FailCallBack("AJAX_FAIL")
     })
 }
+
+
+Core_initLang=function(lang){
+    var initLang_AJAX=$.ajax({
+        dataType: "json",
+        url: 'ajax/lang_'+lang+'.json',
+        async:true,
+
+    }
+    ).done(function(langms){
+        sessionStorage.langtrs=JSON.stringify(langms);});
+
+}
+
+Core_Lang_Out=function(shortdes){
+    return JSON.parse(sessionStorage.langtrs)[shortdes];
+}
