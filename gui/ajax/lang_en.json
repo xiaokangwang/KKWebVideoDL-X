@@ -32,8 +32,9 @@
 	"panel_reconnect_UserSecret_placeholder":"User Secret",
 	"panel_reconnect_commit":"Reconnect",
 	"panel_Server_Status_title":"Server Status",
-	"OpenSource_support":"This program is Opensource with GPLv3 license.You can find source at https://github.com/xiaokangwang/KKWebVideoDL-X"
-
-
+	"OpenSource_support":"This program is Opensource with GPLv3 license.You can find its source at  https://github.com/xiaokangwang/KKWebVideoDL-X .",
+	"ServerStatus_FreeSpace":"Disk space remaining at server",
+	"ServerStatus_Version":"Version of Software running at server",
+	"ServerStatus_Status":"Serer Status"
 
 }

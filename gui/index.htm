@@ -138,7 +138,12 @@
       <div class="panel-heading">
       <h3 class="panel-title">{{UI_panel_Server_Status_title}}</h3>
       </div>
-        Panel content
+        <ul class="list-group">
+            <li class="list-group-item" > {{UI_ServerStatus_FreeSpace}} : {{ServerStatus.FreeSpace}} MB </li>
+            <li class="list-group-item" > {{UI_ServerStatus_Version}} : {{ServerStatus.Version}}  </li>
+            <li class="list-group-item" > {{UI_ServerStatus_Status}} : {{ServerStatus.Status}}  </li>
+        </ul>
+        <!-- This statement MUSTN'T be removed. -->
       <div class="panel-footer">{{UI_OpenSource_support}}</div>
   </div>
   </div>

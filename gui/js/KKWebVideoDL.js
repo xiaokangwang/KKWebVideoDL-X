@@ -210,12 +210,8 @@ Core_GetServerStatus=function (SuccCallback,FailCallBack) {
     Core_GetServerStatus_ReqAJAX.done(function(msg) {
         console.log( "Core_GetServerStatus_Reqsucc");
         console.log( msg );
-        ServerRespond=msg
-        if(ServerRespond.Success!="YES"){
-            FailCallBack(ServerRespond.Reason)
-        }else{
+
             SuccCallback(msg)
-        }
     });
 
     Core_GetServerStatus_ReqAJAX.fail(function(jqXHR, textStatus) {
@@ -371,7 +367,7 @@ User_isConnected=function(){
 
 var KKWebVideoDLApp = angular.module('KKWebVideoDLApp', []);
 
-KKWebVideoDLApp.controller('MainCtrl', function($scope) {
+KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
     var Langpack=Core_Lang_Out_pack();
 
   for(LangID in Langpack){
@@ -394,9 +390,22 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope) {
             $("#container_NewUser").fadeOut(1000);
 
     })
-
   }
   $scope.isloggedin=User_isConnected();
 
+  //Server Status Updater
+   $scope.UpdSS=function(){Core_GetServerStatus(function(data){
+        $scope.ServerStatus=data;
+        $scope.$apply();
+        $timeout($scope.UpdSS,5000);
+    });
+ 
+  }
+
+  $timeout($scope.UpdSS,5000);
+
+  Core_GetServerStatus(function(data){
+        $scope.ServerStatus=data;
+        $scope.$apply();}) //First hit
 
 });
