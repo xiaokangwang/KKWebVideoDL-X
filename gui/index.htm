@@ -59,8 +59,7 @@
             </div>
             <p style="color:#000000;">{{task.ProgressD}}</p>
             </th>
-            <th style="width:20%;">
-            {{task.actionlist}}
+            <th style="width:20%;" ng-bind-html-unsafe="task.actionlist">
             </th>
           </tr>
         </tbady>

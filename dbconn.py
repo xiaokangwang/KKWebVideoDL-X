@@ -139,7 +139,7 @@ def Db_File_CreateCombination(TaskID,File):
 
 def Db_File_ListCombinated(TaskID):
     Filelist=Db_Get_FileCollection().find_one({"TaskID":TaskID})
-    return Filelist["Filelist"]
+    return Filelist["FileList"]
 
 def Db_File_ReverseLookupTaskIDByFileName(FileName):
     Filelist=Db_Get_FileCollection().find({"FileList":FileName})
@@ -147,6 +147,7 @@ def Db_File_ReverseLookupTaskIDByFileName(FileName):
 
 def Db_File_AchivedTask(TaskID):
     Db_Get_FileCollection().update({"TaskID":TaskID},{ "$set": { "Achived" : 1 } } )
+    Db_Get_TaskCollection().update({"TaskID":TaskID},{ "$set": { "Enabled" : 7 }})
 
 
 #Server Status

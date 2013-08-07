@@ -1,6 +1,7 @@
 import dbconn
 import eventID
 import os
+import configure
 
 ###
 ###User
@@ -56,7 +57,7 @@ def Task_GetUserID(DlTaskID):
 
 def File_CreateCombination(DlTaskID,File):
      dbconn.Db_File_CreateCombination(DlTaskID,File)
-     dbconn.Db_LogEvent(eventID.CreateFile,{"DlTaskID":DlTaskID,"File":File})
+     dbconn.Db_LogEvent(eventID.CreateFile,{"TaskID":DlTaskID,"File":File})
 
 def File_ListCombinated(DlTaskID):
     return dbconn.Db_File_ListCombinated(DlTaskID)
@@ -68,9 +69,13 @@ def File_Achive(DlTaskID,Operater):
     FileToAchieves=dbconn.Db_File_ListCombinated(DlTaskID)
 
     for FileToAchieveItem in FileToAchieves:
-        os.unlink(FileToAchieves["FileName"])
+        try:
+            os.unlink(configure.File_store_at+FileToAchieveItem)
+        except Exception:
+            pass
+        
    
-    dbconn.Db_LogEvent(eventID.AchivedFile,{"DlTaskID":DlTaskID,"Operater":Operater})
+    dbconn.Db_LogEvent(eventID.AchivedFile,{"TaskID":DlTaskID,"Operater":Operater})
 
     return dbconn.Db_File_AchivedTask(DlTaskID)
 

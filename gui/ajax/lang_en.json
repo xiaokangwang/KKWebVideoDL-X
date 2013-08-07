@@ -45,5 +45,6 @@
 	"Task_panel_table_action":"Action",
 	"Task_Nothing_to_do":"Nothing to do.Just Wait.",
 	"Task_Nothing_can_do_term":"Your Task failed.Please content us for futher help.",
-	"Task_Nothing_unknow":"There is something bad happend......Please content us for futher help."
+	"Task_Nothing_unknow":"There is something bad happend......Please content us for futher help.",
+	"Task_Nothing_done":"File was unlinked."
 }

@@ -6,6 +6,17 @@ function b64_to_utf8( str ) {
     return decodeURIComponent(escape(window.atob( str )));
 }
 
+function makeid()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
 $("#Get_a_User_Learm_more_tigger").click(
     function(){
                 $("#Get_a_User_Learm_more_data").fadeIn(1000);
@@ -284,7 +295,9 @@ User_showContext_taskstat=function(Enabled){
         case 5:
         return '<span class="glyphicon glyphicon-exclamation-sign"></span>';
         break;
-
+        case 7:
+        return '<span class="glyphicon glyphicon-leaf"></span>';
+        break;
         default:
         return '<span class="glyphicon glyphicon-warning-sign"></span>';
 
@@ -292,7 +305,7 @@ User_showContext_taskstat=function(Enabled){
 }
 
 var downloadURL = function (url) {
-    var hiddenIFrameID = 'hiddenDownloader',
+    var hiddenIFrameID = 'hiddenDownloader'+makeid(),
         iframe = document.getElementById(hiddenIFrameID);
     if (iframe === null) {
         iframe = document.createElement('iframe');
@@ -305,6 +318,7 @@ var downloadURL = function (url) {
 
 var firstload=1;
 
+var kkupmark='"';
 
 User_showContext_taskaction=function(task){
         switch(task.Enabled) {
@@ -321,10 +335,13 @@ User_showContext_taskaction=function(task){
         return Core_Lang_Out("Task_Nothing_to_do");
         break;
         case 4:
-        return '<span class="glyphicon glyphicon-download-alt" ng-click="DownloadTask('+task.TaskID+');"></span><span class="glyphicon glyphicon-fire" ng-click="AchiveTask("'+task.TaskID+'");"></span>';
+        return '<button class="btn btn-default"  id="DownloadTask_'+task.TaskID+'" type="button"><span class="glyphicon glyphicon-download-alt"></span></button><span class="glyphicon glyphicon-fire" id="AchiveTask_'+task.TaskID+'"></span>';
         break;
         case 5:
         return Core_Lang_Out("Task_Nothing_can_do_term");
+        break;
+        case 7:
+        return Core_Lang_Out("Task_Nothing_done");
         break;
 
         default:
@@ -332,7 +349,22 @@ User_showContext_taskaction=function(task){
 
 }
 }
+var the_tasklist=[];
+  DownloadTask=function(TaskID){
+    $.each(the_tasklist,function(index,val){
+        if(val.TaskID==TaskID){
+            $.each(val.ResultF,function(index,val){
+                downloadURL(configure_KKWebVideoDL_Download_Base_URL+val);
+            });
 
+        }
+
+    });
+  }
+
+  AchiveTask=function(TaskID){
+        Core_AchiveTask(localStorage.UserID,localStorage.UserSecret,TaskID,function(){},function(){});
+    };
 
 var KKWebVideoDLApp = angular.module('KKWebVideoDLApp', []);
 
@@ -392,7 +424,7 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
    $scope.UpdTL=function(){Core_ListTask(localStorage.UserID,localStorage.UserSecret,function(data){
         
         $scope.tasklist=[];
-        
+        the_tasklist=data;
         $.each(data,function(index,val){
             var listitem={};
             listitem.Addtime=val.AddTime;
@@ -406,6 +438,22 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
         });
 
         $scope.$apply();
+         $.each(data,function(index,val){
+            if(val.Enabled==4){
+                $("#DownloadTask_"+val.TaskID).click(function(){
+                    DownloadTask(this.id.substr(13));
+                });
+            }
+            //
+        });
+             $.each(data,function(index,val){
+            if(val.Enabled==4){
+                $("#AchiveTask_"+val.TaskID).click(function(){
+                    AchiveTask(this.id.substr(11));
+                });
+            }
+            //
+        });
         $timeout($scope.UpdTL,5000);
     },function() {
         $scope.$apply();
@@ -418,14 +466,8 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
     firstload=0;
   }
 
-  $scope.DownloadTask=function(TaskID){
-    $.each(scope.tasklist.ResultF,function(index,val){
-downloadURL(configure_KKWebVideoDL_Download_Base_URL+val);
-    });
-  }
-    $scope.AchiveTask=function(TaskID){
-        Core_AchiveTask(localStorage.UserID,localStorage.UserSecret,TaskID,function(){},function(){});
-    }
+
+
     $scope.AddTask=function(){
         Core_AddTask(localStorage.UserID,localStorage.UserSecret,$scope.weburladd,function(){
             $("#addtaskbtn").removeAttr("disabled");
