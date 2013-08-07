@@ -36,6 +36,14 @@
 	"ServerStatus_FreeSpace":"Disk space remaining at server",
 	"ServerStatus_Version":"Version of Software running at server",
 	"ServerStatus_Status":"Serer Status",
-	"ServerStatus_Status_Crashed":"Server was Offline,Please refresh this page."
-
+	"ServerStatus_Status_Crashed":"Server was Offline,Please refresh this page.",
+	"Tasks_penel_title":"Tasks",
+	"Tasks_penel_Add_text":"Add",
+	"Task_panel_table_Status":"Status",
+	"Task_panel_table_URL":"URL",
+	"Task_panel_table_Progress":"Progress",
+	"Task_panel_table_action":"Action",
+	"Task_Nothing_to_do":"Nothing to do.Just Wait.",
+	"Task_Nothing_can_do_term":"Your Task failed.Please content us for futher help.",
+	"Task_Nothing_unknow":"There is something bad happend......Please content us for futher help."
 }

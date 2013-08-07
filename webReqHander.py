@@ -11,6 +11,7 @@ import os
 import platform
 import sys
 import time
+import base64
 
 import webreq
 import version
@@ -79,9 +80,8 @@ class NewTask(BaseHandler):
             Error["Detail"]= coreMan.User_Verify(DlInfomation.UserID,DlInfomation.UserSecret)
             return self.json_response(Error)
 
-        Task=coreMan.Task_Add(DlInfomation.weburl,DlInfomation.UserID)
+        Task=coreMan.Task_Add(base64.b64decode(DlInfomation.weburl).decode("utf-8"),DlInfomation.UserID)
         Respond["Success"]="YES"
-        Respond["Task"]=Task
 
         return self.json_response(Respond)
 
@@ -144,7 +144,7 @@ class ListTask(BaseHandler):
             Error={}
             Error["Success"]="NO"
             Error["Reason"]="Authentication_failure"
-            Error["Detail"]= coreMan.User_Verify(DlInfomation.UserID,DlInfomation.UserSecret)
+            Error["Detail"]= coreMan.User_Verify(GetDlResultInfomation.UserID,GetDlResultInfomation.UserSecret)
             return self.json_response(Error)
 
 
@@ -153,22 +153,24 @@ class ListTask(BaseHandler):
         ListingTask=[]
 
         for TaskItem in Tasks:
-            if TaskItem["Addtime"]+configure.Task_show_time >= time.time() :
+            if TaskItem["AddTime"]+configure.Task_show_time >= time.time() :
                 ListingTask.append(TaskItem)
 
         ListingTaskWithResult=[]
 
-        for ListingTask in Taskitem:
+        for Taskitem in ListingTask:
             Taskitemx={}
-            Taskitemx["Addtime"]=Taskitem["Addtime"]
+            Taskitemx["AddTime"]=Taskitem["AddTime"]
             Taskitemx["weburl"]=Taskitem["weburl"]
             Taskitemx["Enabled"]=Taskitem["Enabled"]
+            Taskitemx["TaskID"]=Taskitem["TaskID"]
             Taskitemx["ProgressN"]=coreMan.Task_GetProgress(Taskitem["TaskID"])["Numb"]
             Taskitemx["ProgressD"]=coreMan.Task_GetProgress(Taskitem["TaskID"])["Detail"]
-            Taskitemx["ResultF"]=coreMan.File_ListCombinated(Taskitem["TaskID"])
-            ListingTaskWithResult.append(Taskitemx)
+            if(Taskitem["Enabled"]==4):
+                Taskitemx["ResultF"]=coreMan.File_ListCombinated(Taskitem["TaskID"])
 
-        return self.json_response(ListingTaskWithResult)
+            ListingTaskWithResult.append(Taskitemx)
+        return self.json_response({"Success":"YES","List":ListingTaskWithResult})
 
 class AchiveTask(BaseHandler):
 

@@ -1,13 +1,13 @@
 from datetime import datetime
 from wheezy.core.comp import u
-import base64
+
 
 class Req_Dl(object):
 
-    def __init__(self,UserId=u(''), UserSecret=u(''),weburl=u('')):
-        self.UserId = UserId
+    def __init__(self,UserID=u(''), UserSecret=u(''),weburl=u('')):
+        self.UserID = UserID
         self.UserSecret = UserSecret
-        self.weburl = base64.urlsafe_b64decode(weburl)
+        self.weburl = weburl
 
 class Req_NewUser(object):
 
@@ -16,27 +16,27 @@ class Req_NewUser(object):
 
 class Req_DisableUser(object):
 
-    def __init__(self,TargetUserID=u(''),UserId=u(''), UserSecret=u('')):
-        self.UserId = UserId
-        self.TargetUserId = TargetUserId
+    def __init__(self,TargetUserID=u(''),UserID=u(''), UserSecret=u('')):
+        self.UserID = UserID
+        self.TargetUserID = TargetUserID
         self.UserSecret = UserSecret
 
 class Req_SetPerf(object):
 
-    def __init__(self,PreferFreeFormats=0,UserId=u(''), UserSecret=u('')):
-        self.UserId = UserId
+    def __init__(self,PreferFreeFormats=0,UserID=u(''), UserSecret=u('')):
+        self.UserID = UserID
         self.UserSecret = UserSecret
         self.PreferFreeFormats = PreferFreeFormats
 
 class Req_GetDlResult(object):
 
-    def __init__(self,UserId=u(''), UserSecret=u('')):
-        self.UserId = UserId
-        self.UserSecret = UserSecretID
+    def __init__(self,UserID=u(''), UserSecret=u('')):
+        self.UserID = UserID
+        self.UserSecret = UserSecret
 
 class Req_AchieveFile(object):
 
-    def __init__(self,DlTaskID=u(''),UserId=u(''), UserSecret=u('')):
-        self.UserId = UserId
+    def __init__(self,DlTaskID=u(''),UserID=u(''), UserSecret=u('')):
+        self.UserID = UserID
         self.UserSecret = UserSecret
         self.DlTaskID = DlTaskID

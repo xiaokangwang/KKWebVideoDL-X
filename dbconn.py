@@ -58,8 +58,8 @@ def Db_User_Add(UserEmail):
     Db_Get_UserCollection().insert(User)
     return User
 
-def Db_User_Vef(UserId,UserSecret):
-    User=Db_Get_UserCollection().find_one({"UserId":UserId,"UserSecret":UserSecret})
+def Db_User_Vef(UserID,UserSecret):
+    User=Db_Get_UserCollection().find_one({"UserID":UserID,"UserSecret":UserSecret})
     if User is not None:
             if User["Enabled"]==1:
                 return dbResult.VerifyUser_Success
@@ -70,81 +70,83 @@ def Db_User_Vef(UserId,UserSecret):
     
     
 
-def Db_User_Disable(UserId,action):
-    User=Db_Get_UserCollection().find_one({"UserId":UserId})
+def Db_User_Disable(UserID,action):
+    User=Db_Get_UserCollection().find_one({"UserID":UserID})
     User["Enabled"]=action
-    Db_Get_UserCollection().update({"UserId":UserId},{"$set":{ "Enabled" : action } },upsert=False, multi=False )
+    Db_Get_UserCollection().update({"UserID":UserID},{"$set":{ "Enabled" : action } },upsert=False, multi=False )
     
 
 
 
 #Download Task management
-def Db_Dl_ListTask(UserId):
-    TaskList=Db_Get_TaskCollection().find({"UserID":UserId})
+def Db_Dl_ListTask(UserID):
+    TaskList=Db_Get_TaskCollection().find({"UserID":UserID})
     if TaskList is not None:
         return TaskList
     else:
         return None
     
 
-def Db_Dl_AddTask(weburl,UserId):
+def Db_Dl_AddTask(weburl,UserID):
     AddingTask={}
-    Task["weburl"]=weburl
-    Task["UserId"]=UserId
-    Task["TaskId"]=genTaskId.genTaskID()
-    Task["Enabled"]=configure.Task_immediate_Enable
-    Task["AddTime"]=time.time()
-    Db_Get_TaskCollection().insert(Task)
-    return Task
+    AddingTask["weburl"]=weburl
+    AddingTask["UserID"]=UserID
+    AddingTask["TaskID"]=genTaskId.genTaskID()
+    AddingTask["Enabled"]=configure.Task_immediate_Enable
+    AddingTask["AddTime"]=time.time()
+    AddingTask["Progress"]={"Numb":5,"Detail":"New Task"}
+    AddingTask["Result"]=[]
+    Db_Get_TaskCollection().insert(AddingTask)
+    return AddingTask
     
 
-def Db_Dl_GetTaskProgress(DlTaskID):
-    theTask=Db_Get_TaskCollection().find_one({"DlTaskID":DlTaskID})
+def Db_Dl_GetTaskProgress(TaskID):
+    theTask=Db_Get_TaskCollection().find_one({"TaskID":TaskID})
     return theTask["Progress"]
     
 
-def Db_Dl_GetTaskResult(DlTaskID):
-    theTask=Db_Get_TaskCollection().find_one({"DlTaskID":DlTaskID})
+def Db_Dl_GetTaskResult(TaskID):
+    theTask=Db_Get_TaskCollection().find_one({"TaskID":TaskID})
     return theTask["Result"]
     
 
-def Db_Dl_SetTaskProgress(DlTaskID,Progress):
-    theTask=Db_Get_TaskCollection().update({"DlTaskID":DlTaskID},{ "$set": { "Progress" : Progress } } )
+def Db_Dl_SetTaskProgress(TaskID,Progress):
+    theTask=Db_Get_TaskCollection().update({"TaskID":TaskID},{ "$set": { "Progress" : Progress } } )
     
 
-def Db_Dl_SetTaskResult(DlTaskID,Result):
-    theTask=Db_Get_TaskCollection().update({"DlTaskID":DlTaskID},{ "$set": { "Result" : Result } } )
+def Db_Dl_SetTaskResult(TaskID,Result):
+    theTask=Db_Get_TaskCollection().update({"TaskID":TaskID},{ "$set": { "Result" : Result } } )
     
 
-def Db_Dl_EnableTask(DlTaskID,action):
-    theTask=Db_Get_TaskCollection().update({"DlTaskID":DlTaskID},{ "$set": { "Enabled" : action } } )
+def Db_Dl_EnableTask(TaskID,action):
+    theTask=Db_Get_TaskCollection().update({"TaskID":TaskID},{ "$set": { "Enabled" : action } } )
 
-def Db_Dl_GetTaskOwner(DlTaskID):
-    theTask=Db_Get_TaskCollection().find_one({"DlTaskID":DlTaskID})
-    return theTask["UserId"]
+def Db_Dl_GetTaskOwner(TaskID):
+    theTask=Db_Get_TaskCollection().find_one({"TaskID":TaskID})
+    return theTask["UserID"]
     
 
 
 #Downloaded File Management
-def Db_File_CreateCombination(DlTaskID,File):
-    Filelist=Db_Get_FileCollection().find_one({"DlTaskID":DlTaskID})
+def Db_File_CreateCombination(TaskID,File):
+    Filelist=Db_Get_FileCollection().find_one({"TaskID":TaskID})
     if Filelist is not None:
-        Db_Get_FileCollection().update({"DlTaskID":DlTaskID},{ "$push" : { "FileList" : {File} } })
+        Db_Get_FileCollection().update({"TaskID":TaskID},{ "$push" : { "FileList" : {File} } })
     else:
-        FileList=genFileList.genFileList(DlTaskID)
+        FileList=genFileList.genFileList(TaskID)
     Db_Get_FileCollection().insert(FileList)
     
 
-def Db_File_ListCombinated(DlTaskID):
-    Filelist=Db_Get_FileCollection().find_one({"DlTaskID":DlTaskID})
+def Db_File_ListCombinated(TaskID):
+    Filelist=Db_Get_FileCollection().find_one({"TaskID":TaskID})
     return Filelist["Filelist"]
 
 def Db_File_ReverseLookupTaskIDByFileName(FileName):
     Filelist=Db_Get_FileCollection().find({"FileList":FileName})
     return Filelist
 
-def Db_File_AchivedTask(DlTaskID):
-    Db_Get_FileCollection().update({"DlTaskID":DlTaskID},{ "$set": { "Achived" : 1 } } )
+def Db_File_AchivedTask(TaskID):
+    Db_Get_FileCollection().update({"TaskID":TaskID},{ "$set": { "Achived" : 1 } } )
 
 
 #Server Status

@@ -21,6 +21,54 @@
       </div>
     </div>
 
+<!--Tasks manger-->
+<div class="container" ng-show="isloggedin" id="container_Tasks">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"  id="Get_a_User_Learm_title"  ><span class="glyphicon glyphicon-tasks"></span> {{ UI_Tasks_penel_title }}</h3>
+      </div>
+      <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" id="addtaskbtn" type="button" ng-click="AddTask();"><span class="glyphicon glyphicon-plus"></span> {{ UI_Tasks_penel_Add_text }}</button>
+      </span>
+      <input type="text" class="form-control" ng-model="weburladd">
+    </div><!-- /input-group -->
+    <table class="table table-bordered">
+      <thead>
+          <tr>
+            <th hidden="hidden">addtime</th>
+            <th>{{UI_Task_panel_table_Status}}</th>
+            <th>{{UI_Task_panel_table_URL}}</th>
+            <th>{{UI_Task_panel_table_Progress}}</th>
+            <th>{{UI_Task_panel_table_action}}</th>
+          </tr>
+        </thead>
+        <tbady>
+          <tr ng-repeat="task in tasklist | orderBy:'Addtime':true">
+            <th hidden="hidden" >
+            {{task.Addtime}}
+            </th>
+            <th ng-bind-html-unsafe="task.EnabledE" style="width:5px;">
+            </th>
+            <th style="width:30%;">
+            {{task.weburl}}
+            </th>
+            <th style="width:40%;">
+            <div class="progress progress-striped active">
+                <div class="progress-bar" style="width: {{task.ProgressN}}%"></div>
+            </div>
+            <p style="color:#000000;">{{task.ProgressD}}</p>
+            </th>
+            <th style="width:20%;">
+            {{task.actionlist}}
+            </th>
+          </tr>
+        </tbady>
+    </table>
+    </div>
+</div>
+
+
 <!-- New User -->
 
   <div class="container" ng-hide="isloggedin" id="container_NewUser">
@@ -29,7 +77,7 @@
         <h3 class="panel-title"  id="Get_a_User_Learm_title"  >{{ UI_Get_a_User_Learm_penel_title }}</h3>
       </div>
       <button type="button" class="btn btn-primary btn-large btn-block" id="Get_a_User_Btn" style="border:12px solid;border-color:#FFFFFF"   >{{ UI_Get_a_User_Learm_penel_main_btn }}</button>
-      <button type="button" class="btn btn-link"  id="Get_a_User_Learm_more_tigger"  style="margin-left:85%">{{UI_Get_a_User_Learm_more_tigger}}</button>
+      <button type="button" class="btn btn-link"  id="Get_a_User_Learm_more_tigger"  style="margin-left:85%"> {{UI_Get_a_User_Learm_more_tigger}}</button>
       <div class="accordion" id="Get_a_User_Learm_more_data">
         <div class="accordion-group">
           <div class="accordion-heading">
