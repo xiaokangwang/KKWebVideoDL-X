@@ -154,12 +154,13 @@ def Db_Dl_Pick_a_task_D():
 
 
 #Downloaded File Management
-def Db_File_CreateCombination(VideoID,FileName,Hash_SHA512):
+def Db_File_CreateCombination(VideoID,FileName,Hash_SHA51,size):
     if Db_Get_FileCollection().find_one({"Hash_SHA512":Hash_SHA512}) is None:
         FileItem={}
         FileItem["VideoID"]=VideoID
         FileItem["FileName"]=FileName
         FileItem["Hash_SHA512"]=Hash_SHA512
+        FileItem["size"]=size
         FileItem["counter"]=1
         FileItem["LastUse"]=time.time()
         FileItem["AlwaysKeep"]=0

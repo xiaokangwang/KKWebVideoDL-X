@@ -85,8 +85,8 @@ def Task_Pickone_D():
 
 def File_CreateCombination(VideoID,FileName):
 
-    dbconn.Db_File_CreateCombination(DlTaskID["VideoID"],FileName,genSHA512(FileName))
-    dbconn.Db_LogEvent(eventID.CreateFile,{"TaskID":DlTaskID,"FileName":FileName})
+    dbconn.Db_File_CreateCombination(DlTaskID["VideoID"],FileName,genSHA512(configure.File_store_at+FileName,os.path.getsize(configure.File_store_at+FileName)))
+    dbconn.Db_LogEvent(eventID.CreateFile,{"TaskID":DlTaskID,"FileName":FileName,"size":os.path.getsize(configure.File_store_at+FileName)})
 
 def File_ListCombinated(VideoID):
     return dbconn.Db_File_ListCombinated(DlTaskID)
