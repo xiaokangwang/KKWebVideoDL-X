@@ -91,8 +91,8 @@ def File_CreateCombination(VideoID,FileName):
 def File_ListCombinated(VideoID):
     return dbconn.Db_File_ListCombinated(DlTaskID)
 
-def File_ReverseLookupTaskIDByFileName(VideoID):
-    return dbconn.Db_ReverseLookupTaskIDByFileName(DlTaskID)
+def File_ReverseLookupVideoIDByFileName(VideoID):
+    return dbconn.Db_ReverseLookupTaskIDByFileName(VideoID)
 
 def File_Achive(VideoID,Operater):
     Db_File_AchivedTask(VideoID)
