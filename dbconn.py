@@ -39,6 +39,14 @@ def Db_Get_StatusCollection():
     collection = db['Status']
     return collection
 
+def Db_Get_UsegeCollection():
+    client = MongoClient(configure.The_MongoDB_URL)
+    db = client[configure.The_MongoDB_Db]
+    collection = db['Usege']
+    return collection
+
+
+
 
 #Loging system
 def Db_LogEvent(Event,Details):
@@ -204,3 +212,11 @@ def Db_Server_SetStatus(StatusID):
 def Db_Server_GetStatus():
     return Db_Get_StatusCollection().find_one({"Domain":"Current"})["Status"]
     
+
+
+def Db_Usege_Download_Finished(size):
+    orgsrev=Db_Get_UsegeCollection().find_one({"Type":"system"})
+    Db_Get_UsegeCollection().update({"Type":"system"},"$set":{"count":orgsrev["count"]+1,"size":orgsrev["size"]+size})
+
+def Db_Usege_Download_show(size):
+    return Db_Get_UsegeCollection().find_one({"Type":"system"})

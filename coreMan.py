@@ -132,3 +132,8 @@ def Status_Get():
     return dbconn.Db_Server_GetStatus()
 
 
+def Usege_Put(size):
+    dbconn.Db_Usege_Download_Finished(size)
+
+def Usege_Get():
+    return dbconn.Db_Usege_Download_show()
