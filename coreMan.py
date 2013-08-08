@@ -108,6 +108,7 @@ def File_freemore():
         filelist=dbconn.Db_File_Get_unlink_list()
         nowclean=0
         while fdhr <= configure.Clean_thresholds and len(filelist) !=nowclean:
+            Db_File_unlinked_file(filelist[nowclean])
             os.unlink(filelist[nowclean].FileName)
             fd=os.statvfs(os.getcwd())
             fdhr=(fd.f_bavail * fd.f_frsize) / 1024

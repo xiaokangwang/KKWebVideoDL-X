@@ -115,7 +115,7 @@ def Db_Dl_GetTaskProgress(TaskID):
     return theTask["Progress"]
     
 
-def Db_Dl_GetTaskVideoID(VideoID):
+def Db_Dl_GetTaskVideoID(TaskID):
     theTask=Db_Get_TaskCollection().find_one({"TaskID":TaskID})
     return theTask["VideoID"]
     
@@ -175,10 +175,13 @@ def Db_File_ReverseLookupVideoIDByFileName(FileName):
     VideoID=Db_Get_FileCollection().find_one({"FileName":FileName})
     return VideoID
 
-def Db_File_AchivedTask(VideoID):
+def Db_File_AchivedVideo(VideoID):
     origFiles=Db_Get_FileCollection().find({"VideoID":VideoID})
     for origFilesItem in origFiles:
         Db_Get_FileCollection().update({"Hash_SHA512":origFilesItem["Hash_SHA512"]},{"$set":{"counter":origFilesItem["counter"]-1 }})
+
+def Db_File_AchivedTask(TaskID):
+    Db_File_AchivedVideo(Db_Dl_GetTaskVideoID(TaskID))
 
 def Db_File_unlinked_file(FileName):
     Db_Get_FileCollection().update({"FileName":FileName},{"$set":{"NowAV":0}})
