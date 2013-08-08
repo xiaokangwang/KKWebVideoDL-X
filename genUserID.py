@@ -7,6 +7,7 @@ def genUserID():
     User={}
     User["UserID"]=randomword(25)
     User["UserSecret"]=randomword(128)
+    User["Nice"]=10
     return User
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 def genFileList(DlTaskID):
     FileList={}
-    FileList["DlTaskID"]=DlTaskID
+    FileList["TaskID"]=DlTaskID
     FileList["FileList"]=[]
     return FileList

@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import pymongo
 import time
 import configure
 import eventID
@@ -58,6 +59,14 @@ def Db_User_Add(UserEmail):
     Db_Get_UserCollection().insert(User)
     return User
 
+def Db_User_GetNice(UserID):
+    User=Db_Get_UserCollection().find_one({"UserID":UserID})
+    return User["Nice"]
+
+def Db_User_SetNice(UserID,Nice):
+    User=Db_Get_UserCollection().update({"UserID":UserID},{"$set":{"Nice":Nice}})
+    return User["Nice"]
+
 def Db_User_Vef(UserID,UserSecret):
     User=Db_Get_UserCollection().find_one({"UserID":UserID,"UserSecret":UserSecret})
     if User is not None:
@@ -95,7 +104,8 @@ def Db_Dl_AddTask(weburl,UserID):
     AddingTask["Enabled"]=configure.Task_immediate_Enable
     AddingTask["AddTime"]=time.time()
     AddingTask["Progress"]={"Numb":5,"Detail":"New Task"}
-    AddingTask["Result"]=[]
+    AddingTask["VideoID"]=""
+    AddingTask["Nice"]=Db_User_GetNice(UserID)
     Db_Get_TaskCollection().insert(AddingTask)
     return AddingTask
     
@@ -105,17 +115,17 @@ def Db_Dl_GetTaskProgress(TaskID):
     return theTask["Progress"]
     
 
-def Db_Dl_GetTaskResult(TaskID):
+def Db_Dl_GetTaskVideoID(VideoID):
     theTask=Db_Get_TaskCollection().find_one({"TaskID":TaskID})
-    return theTask["Result"]
+    return theTask["VideoID"]
     
 
 def Db_Dl_SetTaskProgress(TaskID,Progress):
     theTask=Db_Get_TaskCollection().update({"TaskID":TaskID},{ "$set": { "Progress" : Progress } } )
     
 
-def Db_Dl_SetTaskResult(TaskID,Result):
-    theTask=Db_Get_TaskCollection().update({"TaskID":TaskID},{ "$set": { "Result" : Result } } )
+def Db_Dl_SetTaskVideoID(TaskID,VideoID):
+    theTask=Db_Get_TaskCollection().update({"TaskID":TaskID},{ "$set": { "VideoID" : VideoID } } )
     
 
 def Db_Dl_EnableTask(TaskID,action):
@@ -125,29 +135,61 @@ def Db_Dl_GetTaskOwner(TaskID):
     theTask=Db_Get_TaskCollection().find_one({"TaskID":TaskID})
     return theTask["UserID"]
     
+def Db_Dl_Pick_tasks_L():
+    theTasks=Db_Get_TaskCollection().find({"Enabled":1}).sort([("Nice",pymongo.ASCENDING),("AddTime",pymongo.ASCENDING)])
+    return theTasks
+
+def Db_Dl_Pick_a_task_D():
+    theTasks=Db_Get_TaskCollection().find_one({"Enabled":2}).sort([("Nice",pymongo.ASCENDING),("AddTime",pymongo.ASCENDING)])
+    return theTasks[0]
+
 
 
 #Downloaded File Management
-def Db_File_CreateCombination(TaskID,File):
-    Filelist=Db_Get_FileCollection().find_one({"TaskID":TaskID})
-    if Filelist is not None:
-        Db_Get_FileCollection().update({"TaskID":TaskID},{ "$push" : { "FileList" : {File} } })
+def Db_File_CreateCombination(VideoID,FileName,Hash_SHA512):
+    if Db_Get_FileCollection().find_one({"Hash_SHA512":Hash_SHA512}) is None:
+        FileItem={}
+        FileItem["VideoID"]=VideoID
+        FileItem["FileName"]=FileName
+        FileItem["Hash_SHA512"]=Hash_SHA512
+        FileItem["counter"]=1
+        FileItem["LastUse"]=time.time()
+        FileItem["AlwaysKeep"]=0
+        FileItem["NowAV"]=1 #is this file ready to dowmload?
+        Db_Get_FileCollection().insert(FileList)
     else:
-        FileList=genFileList.genFileList(TaskID)
-    Db_Get_FileCollection().insert(FileList)
+        origc=Db_Get_FileCollection().find_one({"Hash_SHA512":Hash_SHA512})
+        Db_Get_FileCollection().update({"Hash_SHA512":Hash_SHA512},{"$set":{"counter":origc + 1,"NowAV":1,"LastUse":time.time()}})
+
+
+
+
+def Db_File_ListCombinated(VideoID):
+    Filelist=Db_Get_FileCollection().find({"VideoID":TaskID})
+    Filelistr=[]
+    for FilelistItem in Filelist:
+        Filelistr.append(FilelistItem["FileName"])
+    return Filelistr
+
+def Db_File_ReverseLookupVideoIDByFileName(FileName):
+    VideoID=Db_Get_FileCollection().find_one({"FileName":FileName})
+    return VideoID
+
+def Db_File_AchivedTask(VideoID):
+    origFiles=Db_Get_FileCollection().find({"VideoID":VideoID})
+    for origFilesItem in origFiles:
+        Db_Get_FileCollection().update({"Hash_SHA512":origFilesItem["Hash_SHA512"]},{"$set":{"counter":origFilesItem["counter"]-1 }})
+
+def Db_File_unlinked_file(FileName):
+    Db_Get_FileCollection().update({"FileName":FileName},{"$set":{"NowAV":0}})
+
+def Db_File_Get_unlink_list():
+    Avl=Db_Get_FileCollection().find({"AlwaysKeep":0,"NowAV":1,"counter":0}).sort([("LastUse",pymongo.ASCENDING)])
+    return Avl
+
     
 
-def Db_File_ListCombinated(TaskID):
-    Filelist=Db_Get_FileCollection().find_one({"TaskID":TaskID})
-    return Filelist["FileList"]
 
-def Db_File_ReverseLookupTaskIDByFileName(FileName):
-    Filelist=Db_Get_FileCollection().find({"FileList":FileName})
-    return Filelist
-
-def Db_File_AchivedTask(TaskID):
-    Db_Get_FileCollection().update({"TaskID":TaskID},{ "$set": { "Achived" : 1 } } )
-    Db_Get_TaskCollection().update({"TaskID":TaskID},{ "$set": { "Enabled" : 7 }})
 
 
 #Server Status

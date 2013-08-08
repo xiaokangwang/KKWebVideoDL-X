@@ -39,3 +39,6 @@ Task_show_time=604800 #7d
 ###
 
 File_store_at="video/"
+
+Clean_thresholds=2000   #in MB
+NoService_thresholds=1000   #in MB
