@@ -113,6 +113,7 @@ def Db_Dl_AddTask(weburl,UserID):
     AddingTask["AddTime"]=time.time()
     AddingTask["Progress"]={"Numb":5,"Detail":"New Task"}
     AddingTask["VideoID"]=""
+    AddingTask["RES"]="HST"
     AddingTask["Nice"]=Db_User_GetNice(UserID)
     Db_Get_TaskCollection().insert(AddingTask)
     return AddingTask
