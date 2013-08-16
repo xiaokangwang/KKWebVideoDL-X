@@ -218,7 +218,7 @@ def Db_Server_GetStatus():
 
 def Db_Usege_Download_Finished(size):
     orgsrev=Db_Get_UsegeCollection().find_one({"Type":"system"})
-    Db_Get_UsegeCollection().update({"Type":"system"},"$set":{"count":orgsrev["count"]+1,"size":orgsrev["size"]+size})
+    Db_Get_UsegeCollection().update({"Type":"system"},{"$set":{"count":orgsrev["count"]+1,"size":orgsrev["size"]+size}})
 
 def Db_Usege_Download_show(size):
     return Db_Get_UsegeCollection().find_one({"Type":"system"})
