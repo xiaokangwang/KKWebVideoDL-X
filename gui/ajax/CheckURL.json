@@ -1,90 +1,548 @@
+[
 {
-	"archiveorg":"(?:https?:\/\/)?(?:www\\.)?archive.org\/details\/([^?\/]+)(?:[?].*)?$",
-	"ard":"^(?:https?:\/\/)?(?:(?:www\\.)?ardmediathek\\.de|mediathek\\.daserste\\.de)\/(?:.*\/)([^\/\\?]+)(?:\\?.*)?",
-	"arte":"(?:http:\/\/)?videos.arte.tv\/(fr|de)\/.*-(.*?).html","auengine":"(?:http:\/\/)?(?:www\\.)?auengine\\.com\/embed.php\\?.*?file=([^&]+).*?",
-	"bandcamp":"http:\/\/.*?\\.bandcamp\\.com\/track\/(.*)",
-	"bliptv":"^(?:https?:\/\/)?(?:\\w+\\.)?blip\\.tv\/((.+\/)|(play\/)|(api\\.swf#))(.+)$",
-	"breakcom":"(?:http:\/\/)?(?:www\\.)?break\\.com\/video\/([^\/]+)",
-	"brightcove":"https?:\/\/.*brightcove\\.com\/(services|viewer).*\\?(.*)",
-	"c56":"https?:\/\/((www|player)\\.)?56\\.com\/(.+?\/)?(v_|(play_album.+-))(.+?)\\.(html|swf)",
-	"canalplus":"https?:\/\/www\\.canalplus\\.fr\/.*?\\?vid=(\\d+)",
-	"collegehumor":"^(?:https?:\/\/)?(?:www\\.)?collegehumor\\.com\/(video|embed|e)\/([0-9]+)\/?(.*)$",
-	"comedycentral":"^(:(tds|thedailyshow|cr|colbert|colbertnation|colbertreport)|(https?:\/\/)?(www\\.)?(thedailyshow|colbertnation)\\.com\/(full-episodes\/(.*)|((the-colbert-report-(videos|collections)\/([0-9]+)\/[^\/]*\/(.*?))|(watch\/([^\/]*)\/(.*)))|(extended-interviews\/([0-9]+)\/playlist_tds_extended_(.*?)\/.*?)))$",
-	"condenast":"http:\/\/(video|www).(%s).com\/(watch|series|video)\/(.+)",
-	"criterion":"https?:\/\/www\\.criterion\\.com\/films\/(\\d*)-.+",
-	"cspan":"http:\/\/www.c-spanvideo.org\/program\/(.*)",
-	"dailymotion":"(?:https?:\/\/)?(?:www\\.)?dailymotion\\.[a-z]{2,3}\/video\/([^\/]+)",
-	"depositfiles":"(?:http:\/\/)?(?:\\w+\\.)?depositfiles\\.com\/(?:..\/(#locale))?files\/(.+)",
-	"dotsub":"(?:http:\/\/)?(?:www\\.)?dotsub\\.com\/view\/([^\/]+)",
-	"dreisat":"(?:http:\/\/)?(?:www\\.)?3sat.de\/mediathek\/index.php\\?(?:(?:mode|display)=[^&]+&)*obj=([0-9]+)$","ehow":"(?:https?:\/\/)?(?:www\\.)?ehow\\.com\/[^\/_?]*_([0-9]+)",
-	"eighttracks":"https?:\/\/8tracks.com\/([^\/]+)\/([^\/#]+)(?:#.*)?$","escapist":"^(https?:\/\/)?(www\\.)?escapistmagazine\\.com\/videos\/view\/([^\/]+)\/([^\/?]+)[\/?]?.*$",
-	"exfm":"(?:http:\/\/)?(?:www\\.)?ex\\.fm\/song\/([^\/]+)",
-	"soundcloud":"^(?:https?:\/\/)?(?:(?:(?:www\\.)?soundcloud\\.com\/([\\w\\d-]+)\/([\\w\\d-]+)\/?(?:[?].*)?$)|(?:api\\.soundcloud\\.com\/tracks\/(\\d+)))",
-	"facebook":"^(?:https?:\/\/)?(?:\\w+\\.)?facebook\\.com\/(?:video\/video|photo)\\.php\\?(?:.*?)v=(\\d+)(?:.*)",
-	"flickr":"(?:https?:\/\/)?(?:www\\.)?flickr\\.com\/photos\/([\\w\\-_@]+)\/(\\d+).*",
-	"freesound":"(?:https?:\/\/)?(?:www\\.)?freesound\\.org\/people\/([^\/]+)\/sounds\/([^\/]+)",
-	"funnyordie":"^(?:https?:\/\/)?(?:www\\.)?funnyordie\\.com\/videos\/([0-9a-f]+)\/.*$",
-	"gamespot":"(?:http:\/\/)?(?:www\\.)?gamespot\\.com\/.*-(\\d+)\/?",
-	"gametrailers":"http:\/\/www.gametrailers.com\/(videos|reviews|full-episodes)\/(.*?)\/(.*)",
-	"googleplus":"(?:https:\/\/)?plus\\.google\\.com\/(?:[^\/]+\/)*?posts\/(\\w+)",
-	"hotnewhiphop":"http:\/\/www\\.hotnewhiphop.com\/.*\\.(.*)\\.html",
-	"howcast":"(?:https?:\/\/)?(?:www\\.)?howcast\\.com\/videos\/(\\d+)",
-	"hypem":"(?:http:\/\/)?(?:www\\.)?hypem\\.com\/track\/([^\/]+)\/([^\/]+)",
-	"ign":"https?:\/\/.+?\\.ign\\.com\/(?:videos|show_videos)(\/.+)?\/(.+)",
-	"ina":"(?:http:\/\/)?(?:www\\.)?ina\\.fr\/video\/(I?[A-F0-9]+)\/.*",
-	"infoq":"^(?:https?:\/\/)?(?:www\\.)?infoq\\.com\/[^\/]+\/[^\/]+$",
-	"instagram":"(?:http:\/\/)?instagram.com\/p\/(.*?)\/",
-	"jukebox":"^http:\/\/www\\.jukebox?\\..+?\\\/.+[,]([a-z0-9\\-]+).html",
-	"justintv":"^(?:http:\/\/)?(?:www\\.)?(?:twitch|justin)\\.tv\/(?:([^\/]+)|(?:(?:[^\/]+)\/b\/([^\/]+))|(?:(?:[^\/]+)\/c\/([^\/]+)))\/?(?:\\#.*)?$",
-	"kankan":"https?:\/\/(?:.*?\\.)?kankan\\.com\/.+?\/(\\d+)\\.shtml",
-	"keek":"https?:\/\/(?:www\\.)?keek\\.com\/(?:!|\\w+\/keeks\/)(\\w+)",
-	"liveleak":"^(?:http?:\/\/)?(?:\\w+\\.)?liveleak\\.com\/view\\?(?:.*?)i=([\\w_]+)(?:.*)",
-	"livestream":"http:\/\/new.livestream.com\/.*?\/(.*?)(\/videos\/(\\d+))?\/?$",
-	"metacafe":"(?:http:\/\/)?(?:www\\.)?metacafe\\.com\/watch\/([^\/]+)\/([^\/]+)\/.*",
-	"mixcloud":"^(?:https?:\/\/)?(?:www\\.)?mixcloud\\.com\/([\\w\\d-]+)\/([\\w\\d-]+)",
-	"mtv":"^https?:\/\/(?:www\\.)?mtv\\.com\/videos\/.+?\/([0-9]+)\/[^\/]+$",
-	"muzu":"https?:\/\/www.muzu.tv\/(.+?)\/(.+?)\/(\\d+)",
-	"mypass":"http:\/\/www.myspass.de\/.*",
-	"myvideo":"(?:http:\/\/)?(?:www\\.)?myvideo\\.de\/(?:[^\/]+\/)?watch\/([0-9]+)\/([^?\/]+).*",
-	"nba":"^(?:https?:\/\/)?(?:watch\\.|www\\.)?nba\\.com\/(?:nba\/)?video(\/[^?]*?)(?:\/index\\.html)?(?:\\?.*)?$",
-	"ooyala":"https?:\/\/.+?\\.ooyala\\.com\/.*?embedCode=(.+?)(&|$)",
-	"photobucket":"(?:http:\/\/)?(?:[a-z0-9]+\\.)?photobucket\\.com\/.*(([\\?\\&]current=)|_)(.*)\\.((flv)|(mp4))",
-	"pornotube":"^(?:https?:\/\/)?(?:\\w+\\.)?pornotube\\.com(\/c\/([0-9]+))?(\/m\/([0-9]+))(\/(.+))$",
-	"rbmaradio":"https?:\/\/(?:www\\.)?rbmaradio\\.com\/shows\/([^\/]+)$",
-	"redtube":"(?:http:\/\/)?(?:www\\.)?redtube\\.com\/([0-9]+)",
-	"ringtv":"(?:http:\/\/)?(?:www\\.)?ringtv\\.craveonline\\.com\/videos\/video\/([^\/]+)",
-	"roxwel":"https?:\/\/www\\.roxwel\\.com\/player\/(.+?)(\\.|\\?|$)",
-	"sina":"https?:\/\/(.*?\\.)?video\\.sina\\.com\\.cn\/((.+?\/(((\\d+).html)|(.*?(\\#|(vid=))(\\d+?)($|&))))|(api\/sinawebApi\/outplay.php\/(.+?)\\.swf))",
-	"spiegel":"https?:\/\/(?:www\\.)?spiegel\\.de\/video\/[^\/]*-([0-9]+)(?:\\.html)?(?:#.*)?$",
-	"stanfordoc":"^(?:https?:\/\/)?openclassroom.stanford.edu(\/?|(\/MainFolder\/(?:HomePage|CoursePage|VideoPage)\\.php([?]course=([^&]+)(&video=([^&]+))?(&.*)?)?))$",
-	"statigram":"(?:http:\/\/)?(?:www\\.)?statigr\\.am\/p\/([^\/]+)",
-	"stream":"\"\"http:\/\/store\\.steampowered\\.com\/(agecheck\/)?(video|app)\/(\\d+)\/?(\\d*)(\\??)",
-	"teamcoco":"http:\/\/teamcoco\\.com\/video\/(.*)",
-	"ted":"http:\/\/www\\.ted\\.com\/(((playlists)\/(\\d+))|((talks)))(\/lang\/(.*?))?\/(\\w+)",
-	"tf1":"http:\/\/videos.tf1.fr\/.*-(.*?).html",
-	"thisav":"https?:\/\/(?:www\\.)?thisav\\.com\/video\/([0-9]+)\/.*",
-	"traileraddict":"(?:http:\/\/)?(?:www\\.)?traileraddict\\.com\/(?:trailer|clip)\/(.+?)\/(.+)",
-	"tudou":"(?:http:\/\/)?(?:www\\.)?tudou\\.com\/(?:listplay|programs)\/(?:view|(.+?))\/(?:([^\/]+)|([^\/]+))(?:\\.html)?",
-	"tumblr":"http:\/\/(.*?)\\.tumblr\\.com\/((post)|(video))\/(\\d*)\/(.*?)",
-	"tutv":"https?:\/\/(?:www\\.)?tu\\.tv\/videos\/([^\/?]+)",
-	"ustream":"https?:\/\/www\\.ustream\\.tv\/recorded\/(\\d+)",
-	"vbox7":"(?:http:\/\/)?(?:www\\.)?vbox7\\.com\/play:([^\/]+)",
-	"veoh":"http:\/\/www\\.veoh\\.com\/watch\/v(\\d*)",
-	"vevo":"((http:\/\/www.vevo.com\/watch\/.*?\/.*?\/)|(vevo:))(.*)$",
-	"videofyme":"https?:\/\/(www.videofy.me\/.+?|p.videofy.me\/v)\/(\\d+)(&|#|$)",
-	"vimeo":"(https?:\/\/)?(?:(?:www|player)\\.)?vimeo(pro)?\\.com\/(?:(?:(?:groups|album)\/[^\/]+)|(?:.*?)\/)?(play_redirect_hls\\?clip_id=)?(?:videos?\/)?([0-9]+)(?:[?].*)?$",
-	"vine":"(?:https?:\/\/)?(?:www\\.)?vine\\.co\/v\/(\\w+)",
-	"wat":"http:\/\/www.wat.tv\/.*-(.*?)_.*?.html",
-	"weibo":"https?:\/\/video\\.weibo\\.com\/v\/weishipin\/t_(.+?)\\.htm",
-	"wimp":"(?:http:\/\/)?(?:www\\.)?wimp\\.com\/([^\/]+)\/",
-	"worldstarhiphop":"https?:\/\/(?:www|m)\\.worldstar(?:candy|hiphop)\\.com\/videos\/video\\.php\\?v=(.*)",
-	"xhamster":"(?:http:\/\/)?(?:www.)?xhamster\\.com\/movies\/([0-9]+)\/.*\\.html",
-	"xnxx":"^(?:https?:\/\/)?video\\.xnxx\\.com\/video([0-9]+)\/(.*)",
-	"xvideos":"^(?:https?:\/\/)?(?:www\\.)?xvideos\\.com\/video([0-9]+)(?:.*)",
-	"yahoo":"http:\/\/screen\\.yahoo\\.com\/.*?-(\\d*?)\\.html",
-	"youjizz":"^(?:https?:\/\/)?(?:\\w+\\.)?youjizz\\.com\/videos\/([^.]+).html$",
-	"youku":"(?:http:\/\/)?(v|player)\\.youku\\.com\/(v_show\/id_|player\\.php\/sid\/)([A-Za-z0-9]+)(\\.html|\/v.swf)",
-	"youporn":"^(?:https?:\/\/)?(?:\\w+\\.)?youporn\\.com\/watch\/([0-9]+)\/([^\/]+)",
-	"youtube":"^((?:https?:\/\/)?(?:youtu\\.be\/|(?:\\w+\\.)?youtube(?:-nocookie)?\\.com\/|tube\\.majestyc\\.net\/)(?:.*?\\#\/)?(?:(?:(?:v|embed|e)\/)|(?:(?:watch|movie(?:_popup)?(?:\\.php)?)?(?:\\?|\\#!?)(?:.*?&)?v=))?)?([0-9A-Za-z_-]+)((1).+)?$",
-	"zdf":"^http:\/\/www\\.zdf\\.de\\\/ZDFmediathek\\\/(.*beitrag\\\/video\\\/)([^\/\\?]+)(?:\\?.*)?"
-}
+"name": "auengine",
+ "Exp": "(?:http://)?(?:www\\.)?auengine\\.com/embed.php\\?.*?file=([^&]+).*?"
+},
+
+
+{
+"name": "vbox7",
+ "Exp": "(?:http://)?(?:www\\.)?vbox7\\.com/play:([^/]+)"
+},
+
+
+{
+"name": "mixcloud",
+ "Exp": "^(?:https?://)?(?:www\\.)?mixcloud\\.com/([\\w\\d-]+)/([\\w\\d-]+)"
+},
+
+
+{
+"name": "exfm",
+ "Exp": "(?:http://)?(?:www\\.)?ex\\.fm/song/([^/]+)"
+},
+
+
+{
+"name": "youku",
+ "Exp": "(?:http://)?(v|player)\\.youku\\.com/(v_show/id_|player\\.php/sid/)([A-Za-z0-9]+)(\\.html|/v.swf)"
+},
+
+
+{
+"name": "videofyme",
+ "Exp": "https?://(www.videofy.me/.+?|p.videofy.me/v)/(\\d+)(&|#|$)"
+},
+
+
+{
+"name": "vine",
+ "Exp": "(?:https?://)?(?:www\\.)?vine\\.co/v/(\\w+)"
+},
+
+
+{
+"name": "ringtv",
+ "Exp": "(?:http://)?(?:www\\.)?ringtv\\.craveonline\\.com/videos/video/([^/]+)"
+},
+
+
+{
+"name": "bliptv",
+ "Exp": "^(?:https?://)?(?:\\w+\\.)?blip\\.tv/((.+/)|(play/)|(api\\.swf#))(.+)$"
+},
+
+
+{
+"name": "stream",
+ "Exp": "\"\"http://store\\.steampowered\\.com/(agecheck/)?(video|app)/(\\d+)/?(\\d*)(\\??)"
+},
+
+
+{
+"name": "escapist",
+ "Exp": "^(https?://)?(www\\.)?escapistmagazine\\.com/videos/view/([^/]+)/([^/?]+)[/?]?.*$"
+},
+
+
+{
+"name": "livestream",
+ "Exp": "http://new.livestream.com/.*?/(.*?)(/videos/(\\d+))?/?$"
+},
+
+
+{
+"name": "depositfiles",
+ "Exp": "(?:http://)?(?:\\w+\\.)?depositfiles\\.com/(?:../(#locale))?files/(.+)"
+},
+
+
+{
+"name": "tumblr",
+ "Exp": "http://(.*?)\\.tumblr\\.com/((post)|(video))/(\\d*)/(.*?)"
+},
+
+
+{
+"name": "pornotube",
+ "Exp": "^(?:https?://)?(?:\\w+\\.)?pornotube\\.com(/c/([0-9]+))?(/m/([0-9]+))(/(.+))$"
+},
+
+
+{
+"name": "infoq",
+ "Exp": "^(?:https?://)?(?:www\\.)?infoq\\.com/[^/]+/[^/]+$"
+},
+
+
+{
+"name": "tutv",
+ "Exp": "https?://(?:www\\.)?tu\\.tv/videos/([^/?]+)"
+},
+
+
+{
+"name": "ustream",
+ "Exp": "https?://www\\.ustream\\.tv/recorded/(\\d+)"
+},
+
+
+{
+"name": "youjizz",
+ "Exp": "^(?:https?://)?(?:\\w+\\.)?youjizz\\.com/videos/([^.]+).html$"
+},
+
+
+{
+"name": "comedycentral",
+ "Exp": "^(:(tds|thedailyshow|cr|colbert|colbertnation|colbertreport)|(https?://)?(www\\.)?(thedailyshow|colbertnation)\\.com/(full-episodes/(.*)|((the-colbert-report-(videos|collections)/([0-9]+)/[^/]*/(.*?))|(watch/([^/]*)/(.*)))|(extended-interviews/([0-9]+)/playlist_tds_extended_(.*?)/.*?)))$"
+},
+
+
+{
+"name": "dotsub",
+ "Exp": "(?:http://)?(?:www\\.)?dotsub\\.com/view/([^/]+)"
+},
+
+
+{
+"name": "photobucket",
+ "Exp": "(?:http://)?(?:[a-z0-9]+\\.)?photobucket\\.com/.*(([\\?\\&]current=)|_)(.*)\\.((flv)|(mp4))"
+},
+
+
+{
+"name": "kankan",
+ "Exp": "https?://(?:.*?\\.)?kankan\\.com/.+?/(\\d+)\\.shtml"
+},
+
+
+{
+"name": "muzu",
+ "Exp": "https?://www.muzu.tv/(.+?)/(.+?)/(\\d+)"
+},
+
+
+{
+"name": "liveleak",
+ "Exp": "^(?:http?://)?(?:\\w+\\.)?liveleak\\.com/view\\?(?:.*?)i=([\\w_]+)(?:.*)"
+},
+
+
+{
+"name": "collegehumor",
+ "Exp": "^(?:https?://)?(?:www\\.)?collegehumor\\.com/(video|embed|e)/([0-9]+)/?(.*)$"
+},
+
+
+{
+"name": "rbmaradio",
+ "Exp": "https?://(?:www\\.)?rbmaradio\\.com/shows/([^/]+)$"
+},
+
+
+{
+"name": "jukebox",
+ "Exp": "^http://www\\.jukebox?\\..+?\\/.+[,
+]([a-z0-9\\-]+).html"
+},
+
+
+{
+"name": "dailymotion",
+ "Exp": "(?:https?://)?(?:www\\.)?dailymotion\\.[a-z]{
+2,
+3}/video/([^/]+)"
+},
+
+
+{
+"name": "stanfordoc",
+ "Exp": "^(?:https?://)?openclassroom.stanford.edu(/?|(/MainFolder/(?:HomePage|CoursePage|VideoPage)\\.php([?]course=([^&]+)(&video=([^&]+))?(&.*)?)?))$"
+},
+
+
+{
+"name": "soundcloud",
+ "Exp": "^(?:https?://)?(?:(?:(?:www\\.)?soundcloud\\.com/([\\w\\d-]+)/([\\w\\d-]+)/?(?:[?].*)?$)|(?:api\\.soundcloud\\.com/tracks/(\\d+)))"
+},
+
+
+{
+"name": "mypass",
+ "Exp": "http://www.myspass.de/.*"
+},
+
+
+{
+"name": "youtube",
+ "Exp": "^((?:https?://)?(?:youtu\\.be/|(?:\\w+\\.)?youtube(?:-nocookie)?\\.com/|tube\\.majestyc\\.net/)(?:.*?\\#/)?(?:(?:(?:v|embed|e)/)|(?:(?:watch|movie(?:_popup)?(?:\\.php)?)?(?:\\?|\\#!?)(?:.*?&)?v=))?)?([0-9A-Za-z_-]+)((1).+)?$"
+},
+
+
+{
+"name": "youporn",
+ "Exp": "^(?:https?://)?(?:\\w+\\.)?youporn\\.com/watch/([0-9]+)/([^/]+)"
+},
+
+
+{
+"name": "hypem",
+ "Exp": "(?:http://)?(?:www\\.)?hypem\\.com/track/([^/]+)/([^/]+)"
+},
+
+
+{
+"name": "sina",
+ "Exp": "https?://(.*?\\.)?video\\.sina\\.com\\.cn/((.+?/(((\\d+).html)|(.*?(\\#|(vid=))(\\d+?)($|&))))|(api/sinawebApi/outplay.php/(.+?)\\.swf))"
+},
+
+
+{
+"name": "dreisat",
+ "Exp": "(?:http://)?(?:www\\.)?3sat.de/mediathek/index.php\\?(?:(?:mode|display)=[^&]+&)*obj=([0-9]+)$"
+},
+
+
+{
+"name": "tudou",
+ "Exp": "(?:http://)?(?:www\\.)?tudou\\.com/(?:listplay|programs)/(?:view|(.+?))/(?:([^/]+)|([^/]+))(?:\\.html)?"
+},
+
+
+{
+"name": "hotnewhiphop",
+ "Exp": "http://www\\.hotnewhiphop.com/.*\\.(.*)\\.html"
+},
+
+
+{
+"name": "ina",
+ "Exp": "(?:http://)?(?:www\\.)?ina\\.fr/video/(I?[A-F0-9]+)/.*"
+},
+
+
+{
+"name": "canalplus",
+ "Exp": "https?://www\\.canalplus\\.fr/.*?\\?vid=(\\d+)"
+},
+
+
+{
+"name": "ehow",
+ "Exp": "(?:https?://)?(?:www\\.)?ehow\\.com/[^/_?]*_([0-9]+)"
+},
+
+
+{
+"name": "veoh",
+ "Exp": "http://www\\.veoh\\.com/watch/v(\\d*)"
+},
+
+
+{
+"name": "myvideo",
+ "Exp": "(?:http://)?(?:www\\.)?myvideo\\.de/(?:[^/]+/)?watch/([0-9]+)/([^?/]+).*"
+},
+
+
+{
+"name": "keek",
+ "Exp": "https?://(?:www\\.)?keek\\.com/(?:!|\\w+/keeks/)(\\w+)"
+},
+
+
+{
+"name": "cspan",
+ "Exp": "http://www.c-spanvideo.org/program/(.*)"
+},
+
+
+{
+"name": "traileraddict",
+ "Exp": "(?:http://)?(?:www\\.)?traileraddict\\.com/(?:trailer|clip)/(.+?)/(.+)"
+},
+
+
+{
+"name": "worldstarhiphop",
+ "Exp": "https?://(?:www|m)\\.worldstar(?:candy|hiphop)\\.com/videos/video\\.php\\?v=(.*)"
+},
+
+
+{
+"name": "xhamster",
+ "Exp": "(?:http://)?(?:www.)?xhamster\\.com/movies/([0-9]+)/.*\\.html"
+},
+
+
+{
+"name": "archiveorg",
+ "Exp": "(?:https?://)?(?:www\\.)?archive.org/details/([^?/]+)(?:[?].*)?$"
+},
+
+
+{
+"name": "instagram",
+ "Exp": "(?:http://)?instagram.com/p/(.*?)/"
+},
+
+
+{
+"name": "brightcove",
+ "Exp": "https?://.*brightcove\\.com/(services|viewer).*\\?(.*)"
+},
+
+
+{
+"name": "zdf",
+ "Exp": "^http://www\\.zdf\\.de\\/ZDFmediathek\\/(.*beitrag\\/video\\/)([^/\\?]+)(?:\\?.*)?"
+},
+
+
+{
+"name": "funnyordie",
+ "Exp": "^(?:https?://)?(?:www\\.)?funnyordie\\.com/videos/([0-9a-f]+)/.*$"
+},
+
+
+{
+"name": "howcast",
+ "Exp": "(?:https?://)?(?:www\\.)?howcast\\.com/videos/(\\d+)"
+},
+
+
+{
+"name": "wimp",
+ "Exp": "(?:http://)?(?:www\\.)?wimp\\.com/([^/]+)/"
+},
+
+
+{
+"name": "spiegel",
+ "Exp": "https?://(?:www\\.)?spiegel\\.de/video/[^/]*-([0-9]+)(?:\\.html)?(?:#.*)?$"
+},
+
+
+{
+"name": "ard",
+ "Exp": "^(?:https?://)?(?:(?:www\\.)?ardmediathek\\.de|mediathek\\.daserste\\.de)/(?:.*/)([^/\\?]+)(?:\\?.*)?"
+},
+
+
+{
+"name": "justintv",
+ "Exp": "^(?:http://)?(?:www\\.)?(?:twitch|justin)\\.tv/(?:([^/]+)|(?:(?:[^/]+)/b/([^/]+))|(?:(?:[^/]+)/c/([^/]+)))/?(?:\\#.*)?$"
+},
+
+
+{
+"name": "freesound",
+ "Exp": "(?:https?://)?(?:www\\.)?freesound\\.org/people/([^/]+)/sounds/([^/]+)"
+},
+
+
+{
+"name": "ign",
+ "Exp": "https?://.+?\\.ign\\.com/(?:videos|show_videos)(/.+)?/(.+)"
+},
+
+
+{
+"name": "redtube",
+ "Exp": "(?:http://)?(?:www\\.)?redtube\\.com/([0-9]+)"
+},
+
+
+{
+"name": "xnxx",
+ "Exp": "^(?:https?://)?video\\.xnxx\\.com/video([0-9]+)/(.*)"
+},
+
+
+{
+"name": "criterion",
+ "Exp": "https?://www\\.criterion\\.com/films/(\\d*)-.+"
+},
+
+
+{
+"name": "flickr",
+ "Exp": "(?:https?://)?(?:www\\.)?flickr\\.com/photos/([\\w\\-_@]+)/(\\d+).*"
+},
+
+
+{
+"name": "teamcoco",
+ "Exp": "http://teamcoco\\.com/video/(.*)"
+},
+
+
+{
+"name": "gamespot",
+ "Exp": "(?:http://)?(?:www\\.)?gamespot\\.com/.*-(\\d+)/?"
+},
+
+
+{
+"name": "arte",
+ "Exp": "(?:http://)?videos.arte.tv/(fr|de)/.*-(.*?).html"
+},
+
+
+{
+"name": "ted",
+ "Exp": "http://www\\.ted\\.com/(((playlists)/(\\d+))|((talks)))(/lang/(.*?))?/(\\w+)"
+},
+
+
+{
+"name": "facebook",
+ "Exp": "^(?:https?://)?(?:\\w+\\.)?facebook\\.com/(?:video/video|photo)\\.php\\?(?:.*?)v=(\\d+)(?:.*)"
+},
+
+
+{
+"name": "ooyala",
+ "Exp": "https?://.+?\\.ooyala\\.com/.*?embedCode=(.+?)(&|$)"
+},
+
+
+{
+"name": "vevo",
+ "Exp": "((http://www.vevo.com/watch/.*?/.*?/)|(vevo:))(.*)$"
+},
+
+
+{
+"name": "wat",
+ "Exp": "http://www.wat.tv/.*-(.*?)_.*?.html"
+},
+
+
+{
+"name": "metacafe",
+ "Exp": "(?:http://)?(?:www\\.)?metacafe\\.com/watch/([^/]+)/([^/]+)/.*"
+},
+
+
+{
+"name": "thisav",
+ "Exp": "https?://(?:www\\.)?thisav\\.com/video/([0-9]+)/.*"
+},
+
+
+{
+"name": "mtv",
+ "Exp": "^https?://(?:www\\.)?mtv\\.com/videos/.+?/([0-9]+)/[^/]+$"
+},
+
+
+{
+"name": "nba",
+ "Exp": "^(?:https?://)?(?:watch\\.|www\\.)?nba\\.com/(?:nba/)?video(/[^?]*?)(?:/index\\.html)?(?:\\?.*)?$"
+},
+
+
+{
+"name": "c56",
+ "Exp": "https?://((www|player)\\.)?56\\.com/(.+?/)?(v_|(play_album.+-))(.+?)\\.(html|swf)"
+},
+
+
+{
+"name": "condenast",
+ "Exp": "http://(video|www).(%s).com/(watch|series|video)/(.+)"
+},
+
+
+{
+"name": "roxwel",
+ "Exp": "https?://www\\.roxwel\\.com/player/(.+?)(\\.|\\?|$)"
+},
+
+
+{
+"name": "tf1",
+ "Exp": "http://videos.tf1.fr/.*-(.*?).html"
+},
+
+
+{
+"name": "weibo",
+ "Exp": "https?://video\\.weibo\\.com/v/weishipin/t_(.+?)\\.htm"
+},
+
+
+{
+"name": "xvideos",
+ "Exp": "^(?:https?://)?(?:www\\.)?xvideos\\.com/video([0-9]+)(?:.*)"
+},
+
+
+{
+"name": "breakcom",
+ "Exp": "(?:http://)?(?:www\\.)?break\\.com/video/([^/]+)"
+},
+
+
+{
+"name": "gametrailers",
+ "Exp": "http://www.gametrailers.com/(videos|reviews|full-episodes)/(.*?)/(.*)"
+},
+
+
+{
+"name": "yahoo",
+ "Exp": "http://screen\\.yahoo\\.com/.*?-(\\d*?)\\.html"
+},
+
+
+{
+"name": "statigram",
+ "Exp": "(?:http://)?(?:www\\.)?statigr\\.am/p/([^/]+)"
+},
+
+
+{
+"name": "eighttracks",
+ "Exp": "https?://8tracks.com/([^/]+)/([^/#]+)(?:#.*)?$"
+},
+
+
+{
+"name": "vimeo",
+ "Exp": "(https?://)?(?:(?:www|player)\\.)?vimeo(pro)?\\.com/(?:(?:(?:groups|album)/[^/]+)|(?:.*?)/)?(play_redirect_hls\\?clip_id=)?(?:videos?/)?([0-9]+)(?:[?].*)?$"
+},
+
+
+{
+"name": "googleplus",
+ "Exp": "(?:https://)?plus\\.google\\.com/(?:[^/]+/)*?posts/(\\w+)"
+},
+
+
+{
+"name": "bandcamp",
+ "Exp": "http://.*?\\.bandcamp\\.com/track/(.*)"}
+ ]
