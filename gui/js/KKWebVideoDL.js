@@ -504,5 +504,9 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
 
     initPreprogressing();
 
+    $scope.OnTaskURLChange=function(){
+        
+    }
+
 
 });

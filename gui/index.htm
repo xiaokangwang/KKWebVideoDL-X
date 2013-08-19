@@ -25,14 +25,18 @@
 <div class="container" ng-show="isloggedin" id="container_Tasks">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title"  id="Get_a_User_Learm_title"  ><span class="glyphicon glyphicon-tasks"></span> {{ UI_Tasks_penel_title }}</h3>
+        <h3 class="panel-title"  id="Task_title" ><span class="glyphicon glyphicon-tasks"></span> {{ UI_Tasks_penel_title }}</h3>
       </div>
       <div class="input-group">
       <span class="input-group-btn">
         <button class="btn btn-default" id="addtaskbtn" type="button" ng-click="AddTask();"><span class="glyphicon glyphicon-plus"></span> {{ UI_Tasks_penel_Add_text }}</button>
       </span>
       <input type="text" class="form-control" ng-model="weburladd">
+      <div class="alert alert-info" id='Tasknowpre' ng-show="weburladd" ng-change="OnTaskURLChange();">
+      {{UI_TAsk_Now_Video_prefix}} <strong> {{TaskActionKind}} </strong>
+      </div>
     </div><!-- /input-group -->
+
     <table class="table table-bordered">
       <thead>
           <tr>
