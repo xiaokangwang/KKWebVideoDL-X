@@ -145,6 +145,24 @@ Core_initLang=function(lang){
     sessionStorage.langtrslt=lang
 }
 
+
+Core_initPreprogressing=function(donecallback){
+    if(sessionStorage.URLRegExpMap==undefined){
+    var initPPr_AJAX=$.ajax({
+        dataType: "json",
+        url: 'ajax/CheckURL.json',
+        async:true,
+    }
+    ).done(function(urlms){
+        sessionStorage.URLRegExpMap=JSON.stringify(urlms);});
+        donecallback(urlms);
+
+    }else{
+        donecallback(JSON.parse(sessionStorage.URLRegExpMap));
+    }
+}
+
+
 Core_Lang_Out=function(shortdes){
     return JSON.parse(sessionStorage.langtrs)[shortdes];
 }
@@ -247,6 +265,7 @@ User_LoadLang=function(){
 }
 
 User_LoadLang();
+
 
 User_SetLang=function(langtoset){
     localStorage.langperf=langtoset;
@@ -475,6 +494,15 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
         $scope.weburladd="";
         $("#addtaskbtn").attr("disabled", "disabled");
     }
+
+
+    $scope.initPreprogressing=function(){
+        Core_initPreprogressing(function(URLMAP){
+            $scope.URLRegExpMap=URLMAP;
+        })
+    }
+
+    initPreprogressing();
 
 
 });
