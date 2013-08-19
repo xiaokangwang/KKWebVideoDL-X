@@ -385,6 +385,9 @@ var the_tasklist=[];
         Core_AchiveTask(localStorage.UserID,localStorage.UserSecret,TaskID,function(){},function(){});
     };
 
+
+
+
 var KKWebVideoDLApp = angular.module('KKWebVideoDLApp', []);
 
 KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
@@ -504,8 +507,42 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
 
     initPreprogressing();
 
+
+    $scope.User_PreprogressURL=function(URL){
+    
+    //test if it can be download as video
+
+    $.each($scope.URLRegExpMap,function(index,ele){
+        var reg = new RegExp(ele["Exp"]);
+        if(reg.test(URL)){
+         return ele;
+        }
+    });
+
+    //test here if it can be download as File
+
+    var reg = new RegExp("^(http|https)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$");
+        if(reg.test(URL)){
+         return "file";
+        }
+
+    return "bad";
+
+
+}
+
     $scope.OnTaskURLChange=function(){
-        
+        result=User_PreprogressURL($scope.weburladd);
+        if(result=="bad"){
+            $scope.TaskActionKind="Incorrect URL";
+            return;
+        }
+        if(result=="file"){
+            $scope.TaskActionKind="File";
+            return;
+        }
+        $scope.TaskActionKind=result["name"];
+
     }
 
 
