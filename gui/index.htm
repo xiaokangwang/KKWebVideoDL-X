@@ -31,12 +31,12 @@
       <span class="input-group-btn">
         <button class="btn btn-default" id="addtaskbtn" type="button" ng-click="AddTask();"><span class="glyphicon glyphicon-plus"></span> {{ UI_Tasks_penel_Add_text }}</button>
       </span>
-      <input type="text" class="form-control" ng-model="weburladd">
-      <div class="alert alert-info" id='Tasknowpre' ng-show="weburladd" ng-change="OnTaskURLChange();">
+      <input type="text" class="form-control" ng-model="weburladd" ng-change="OnTaskURLChange()" >
+
+    </div><!-- /input-group -->
+      <div class="alert alert-info" id='Tasknowpre' ng-model-onblur ng-show="weburladd">
       {{UI_TAsk_Now_Video_prefix}} <strong> {{TaskActionKind}} </strong>
       </div>
-    </div><!-- /input-group -->
-
     <table class="table table-bordered">
       <thead>
           <tr>

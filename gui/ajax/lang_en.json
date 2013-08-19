@@ -46,5 +46,6 @@
 	"Task_Nothing_to_do":"Nothing to do.Just Wait.",
 	"Task_Nothing_can_do_term":"Your Task failed.Please content us for futher help.",
 	"Task_Nothing_unknow":"There is something bad happend......Please content us for futher help.",
-	"Task_Nothing_done":"File was unlinked."
+	"Task_Nothing_done":"File was unlinked.",
+	"TAsk_Now_Video_prefix":"The URL you input is going to be progress as"
 }

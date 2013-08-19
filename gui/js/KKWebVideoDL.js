@@ -151,11 +151,13 @@ Core_initPreprogressing=function(donecallback){
     var initPPr_AJAX=$.ajax({
         dataType: "json",
         url: 'ajax/CheckURL.json',
-        async:true,
+        async:false,
     }
     ).done(function(urlms){
-        sessionStorage.URLRegExpMap=JSON.stringify(urlms);});
+        sessionStorage.URLRegExpMap=JSON.stringify(urlms);
         donecallback(urlms);
+
+    });
 
     }else{
         donecallback(JSON.parse(sessionStorage.URLRegExpMap));
@@ -505,24 +507,66 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
         })
     }
 
-    initPreprogressing();
+    $scope.initPreprogressing();
 
 
     $scope.User_PreprogressURL=function(URL){
     
     //test if it can be download as video
+usible=0;
+usiblobj={};
 
     $.each($scope.URLRegExpMap,function(index,ele){
         var reg = new RegExp(ele["Exp"]);
         if(reg.test(URL)){
-         return ele;
+         usible=1;
+         usiblobj=ele;
         }
     });
-
+if(usible){
+    return usiblobj;
+}
     //test here if it can be download as File
 
-    var reg = new RegExp("^(http|https)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$");
-        if(reg.test(URL)){
+
+ var re_weburl = new RegExp( //from https://gist.github.com/dperini/729294
+  "^" +
+    // protocol identifier
+    "(?:(?:https?|ftp)://)" +
+    // user:pass authentication
+    "(?:\\S+(?::\\S*)?@)?" +
+    "(?:" +
+      // IP address exclusion
+      // private & local networks
+      "(?!10(?:\\.\\d{1,3}){3})" +
+      "(?!127(?:\\.\\d{1,3}){3})" +
+      "(?!169\\.254(?:\\.\\d{1,3}){2})" +
+      "(?!192\\.168(?:\\.\\d{1,3}){2})" +
+      "(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})" +
+      // IP address dotted notation octets
+      // excludes loopback network 0.0.0.0
+      // excludes reserved space >= 224.0.0.0
+      // excludes network & broacast addresses
+      // (first & last IP address of each class)
+      "(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])" +
+      "(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}" +
+      "(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))" +
+    "|" +
+      // host name
+      "(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)" +
+      // domain name
+      "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*" +
+      // TLD identifier
+      "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))" +
+    ")" +
+    // port number
+    "(?::\\d{2,5})?" +
+    // resource path
+    "(?:/[^\\s]*)?" +
+  "$", "i"
+);
+
+        if(re_weburl.test(URL)){
          return "file";
         }
 
@@ -532,7 +576,7 @@ KKWebVideoDLApp.controller('MainCtrl', function($scope,$timeout) {
 }
 
     $scope.OnTaskURLChange=function(){
-        result=User_PreprogressURL($scope.weburladd);
+        result=$scope.User_PreprogressURL($scope.weburladd);
         if(result=="bad"){
             $scope.TaskActionKind="Incorrect URL";
             return;
