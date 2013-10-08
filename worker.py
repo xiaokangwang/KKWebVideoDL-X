@@ -91,6 +91,9 @@ def DeepProgress():
     Task=now_Dprogressing
     coreMan.Task_Enable(Task['TaskID'],3)
     urls=[Task["weburl"]]
+    if Task['TaskID'][0,3]=="File":
+        DownloadTask()
+
     try:
         retcode=ydl.download(urls)
     except Exception:
@@ -168,7 +171,11 @@ def LightProgress():
         try:
             url=theTask["weburl"]
             info=ydl.extract_infoL(urls,False)
-            VideoID=info['extractor']+info['id']+Task['RES']
+            if(info['extractor']!="generic"):
+                VideoID=info['extractor']+info['id']+Task['RES']
+            else:
+                VideoID="File"+theTask["weburl"]
+            
             coreMan.Task_SetVideoID(theTask['TaskID'],VideoID)
             coreMan.Task_Enable(theTask['TaskID'],2)
         except Exception:
