@@ -23,8 +23,14 @@ def subthook(filen):
 def isServerRunning():
     if(coreMan.Task_Picksome_L() is None and coreMan.Task_Pickone_D() is None):
         time.sleep(20)
-
     return 1
+
+
+def DownloadTask():
+    global now_Dprogressing
+    Task=now_Dprogressing
+    coreMan.Task_Enable(Task['TaskID'],3)
+    //TODO: Progress Download
 
 def DeepProgress():
     ydl=youtube_dl.YoutubeDL({
