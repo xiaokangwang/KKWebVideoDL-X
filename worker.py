@@ -30,7 +30,7 @@ def DownloadTask():
     global now_Dprogressing
     Task=now_Dprogressing
     coreMan.Task_Enable(Task['TaskID'],3)
-    //TODO: Progress Download
+    subprocess.check_call(["wget", "-b","-O",configure.File_store_at+Task['TaskID'],Task["weburl"]])
 
 def DeepProgress():
     ydl=youtube_dl.YoutubeDL({
