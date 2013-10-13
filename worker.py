@@ -14,7 +14,7 @@ def genprogress(status):
 def progresshook(status):
     if status["status"]=="downloading":
         coreMan.Task_SetProgress(now_Dprogressing["TaskID"],genprogress(status))
-    if status["status"]=="downloading":
+    if status["status"]=="finished":
         coreMan.File_CreateCombination(now_Dprogressing["TaskID"],status["FileName"])
 
 def subthook(filen):
