@@ -222,3 +222,14 @@ def Db_Usege_Download_Finished(size):
 
 def Db_Usege_Download_show(size):
     return Db_Get_UsegeCollection().find_one({"Type":"system"})
+
+#Server Log report
+
+def Db_Get_LogReport(bgn,due):
+    pass
+
+def Db_Push_LogReport(Rep):
+    pass
+
+def Db_Get_LogRange(bgn,due):
+    return Db_Get_LogCollection().find({"Time":{"$gt":bgn,"$lt":due}})
